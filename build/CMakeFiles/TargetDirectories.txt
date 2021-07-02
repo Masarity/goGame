@@ -1,3 +1,0 @@
-/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles/edit_cache.dir
-/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles/rebuild_cache.dir
-/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles/startGame.dir

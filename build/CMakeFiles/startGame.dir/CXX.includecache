@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Game.h
+SFML/Window.hpp
+-
+SFML/Graphics.hpp
+-
+
+../include/Locals.h
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Game.cpp
+iostream
+-
+Game.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Game.h
+Locals.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Locals.h
+

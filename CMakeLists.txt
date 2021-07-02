@@ -12,17 +12,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES main.cpp)
 
 set(FILES_HEADER
-    # ${INCROOT}/Game.h
+    ${INCROOT}/Game.h
     # ${INCROOT}/Board.hpp
     # ${INCROOT}/Ball.hpp
     # ${INCROOT}/PoolSide.hpp
     # ${INCROOT}/CreateStaticElements.hpp
-    # ${INCROOT}/Physics.hpp
+    ${INCROOT}/Locals.h
     )
     
 set(FILES_SRC 
     ${SRCROOT}/main.cpp
-    # ${SRCROOT}/Game.cpp
+    ${SRCROOT}/Game.cpp
     # ${SRCROOT}/Board.cpp
     # ${SRCROOT}/Ball.cpp
     # ${SRCROOT}/PoolSide.cpp

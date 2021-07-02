@@ -6,13 +6,55 @@
 
 #IncludeRegexTransform: 
 
+../include/ChessBoard.hpp
+iostream
+-
+SFML/Graphics.hpp
+-
+vector
+-
+stack
+-
+ChessPiece.hpp
+../include/ChessPiece.hpp
+
+../include/ChessPiece.hpp
+iostream
+-
+SFML/Graphics.hpp
+-
+
 ../include/Game.h
 SFML/Window.hpp
 -
 SFML/Graphics.hpp
 -
+ChessBoard.hpp
+../include/ChessBoard.hpp
+GoRule.hpp
+../include/GoRule.hpp
+
+../include/GoRule.hpp
+ChessBoard.hpp
+../include/ChessBoard.hpp
 
 ../include/Locals.h
+SFML/Graphics.hpp
+-
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessBoard.cpp
+iostream
+-
+ChessBoard.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessBoard.hpp
+Locals.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Locals.h
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessPiece.cpp
+iostream
+-
+ChessPiece.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessPiece.hpp
 
 /media/masa/Masa/Masa/robos/project/go/goGame/src/Game.cpp
 iostream
@@ -21,4 +63,18 @@ Game.h
 /media/masa/Masa/Masa/robos/project/go/goGame/src/Game.h
 Locals.h
 /media/masa/Masa/Masa/robos/project/go/goGame/src/Locals.h
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/GoRule.cpp
+iostream
+-
+GoRule.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/GoRule.hpp
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/main.cpp
+iostream
+-
+cstdlib
+-
+Game.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Game.h
 

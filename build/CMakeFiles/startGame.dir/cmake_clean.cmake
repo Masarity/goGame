@@ -1,5 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/startGame.dir/src/ChessBoard.cpp.o"
+  "CMakeFiles/startGame.dir/src/ChessPiece.cpp.o"
   "CMakeFiles/startGame.dir/src/Game.cpp.o"
+  "CMakeFiles/startGame.dir/src/GoRule.cpp.o"
   "CMakeFiles/startGame.dir/src/main.cpp.o"
   "startGame"
   "startGame.pdb"

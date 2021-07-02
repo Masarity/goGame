@@ -123,6 +123,60 @@ startGame/fast:
 	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/build
 .PHONY : startGame/fast
 
+src/ChessBoard.o: src/ChessBoard.cpp.o
+
+.PHONY : src/ChessBoard.o
+
+# target to build an object file
+src/ChessBoard.cpp.o:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessBoard.cpp.o
+.PHONY : src/ChessBoard.cpp.o
+
+src/ChessBoard.i: src/ChessBoard.cpp.i
+
+.PHONY : src/ChessBoard.i
+
+# target to preprocess a source file
+src/ChessBoard.cpp.i:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessBoard.cpp.i
+.PHONY : src/ChessBoard.cpp.i
+
+src/ChessBoard.s: src/ChessBoard.cpp.s
+
+.PHONY : src/ChessBoard.s
+
+# target to generate assembly for a file
+src/ChessBoard.cpp.s:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessBoard.cpp.s
+.PHONY : src/ChessBoard.cpp.s
+
+src/ChessPiece.o: src/ChessPiece.cpp.o
+
+.PHONY : src/ChessPiece.o
+
+# target to build an object file
+src/ChessPiece.cpp.o:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessPiece.cpp.o
+.PHONY : src/ChessPiece.cpp.o
+
+src/ChessPiece.i: src/ChessPiece.cpp.i
+
+.PHONY : src/ChessPiece.i
+
+# target to preprocess a source file
+src/ChessPiece.cpp.i:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessPiece.cpp.i
+.PHONY : src/ChessPiece.cpp.i
+
+src/ChessPiece.s: src/ChessPiece.cpp.s
+
+.PHONY : src/ChessPiece.s
+
+# target to generate assembly for a file
+src/ChessPiece.cpp.s:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessPiece.cpp.s
+.PHONY : src/ChessPiece.cpp.s
+
 src/Game.o: src/Game.cpp.o
 
 .PHONY : src/Game.o
@@ -149,6 +203,33 @@ src/Game.s: src/Game.cpp.s
 src/Game.cpp.s:
 	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/Game.cpp.s
 .PHONY : src/Game.cpp.s
+
+src/GoRule.o: src/GoRule.cpp.o
+
+.PHONY : src/GoRule.o
+
+# target to build an object file
+src/GoRule.cpp.o:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoRule.cpp.o
+.PHONY : src/GoRule.cpp.o
+
+src/GoRule.i: src/GoRule.cpp.i
+
+.PHONY : src/GoRule.i
+
+# target to preprocess a source file
+src/GoRule.cpp.i:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoRule.cpp.i
+.PHONY : src/GoRule.cpp.i
+
+src/GoRule.s: src/GoRule.cpp.s
+
+.PHONY : src/GoRule.s
+
+# target to generate assembly for a file
+src/GoRule.cpp.s:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoRule.cpp.s
+.PHONY : src/GoRule.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -186,9 +267,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... startGame"
+	@echo "... src/ChessBoard.o"
+	@echo "... src/ChessBoard.i"
+	@echo "... src/ChessBoard.s"
+	@echo "... src/ChessPiece.o"
+	@echo "... src/ChessPiece.i"
+	@echo "... src/ChessPiece.s"
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
+	@echo "... src/GoRule.o"
+	@echo "... src/GoRule.i"
+	@echo "... src/GoRule.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

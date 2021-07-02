@@ -13,9 +13,9 @@ set(SOURCE_FILES main.cpp)
 
 set(FILES_HEADER
     ${INCROOT}/Game.h
-    # ${INCROOT}/Board.hpp
-    # ${INCROOT}/Ball.hpp
-    # ${INCROOT}/PoolSide.hpp
+    ${INCROOT}/ChessBoard.hpp
+    ${INCROOT}/ChessPiece.hpp
+    ${INCROOT}/GoRule.hpp
     # ${INCROOT}/CreateStaticElements.hpp
     ${INCROOT}/Locals.h
     )
@@ -23,9 +23,9 @@ set(FILES_HEADER
 set(FILES_SRC 
     ${SRCROOT}/main.cpp
     ${SRCROOT}/Game.cpp
-    # ${SRCROOT}/Board.cpp
-    # ${SRCROOT}/Ball.cpp
-    # ${SRCROOT}/PoolSide.cpp
+    ${SRCROOT}/ChessBoard.cpp
+    ${SRCROOT}/ChessPiece.cpp
+    ${SRCROOT}/GoRule.cpp
     # ${SRCROOT}/CreateStaticElements.cpp
     # ${SRCROOT}/Physics.cpp
     )

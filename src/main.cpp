@@ -4,7 +4,8 @@
 
 int main(int argc, char** argv)
 {   
-    int fps = 60;
+    //帧率默认是30，可以通过命令行传参改变（第二个参数）
+    int fps = 30;
     if (argc > 1)
         fps = atoi(argv[1]);
     std::cout << "Game start!~" << std::endl;

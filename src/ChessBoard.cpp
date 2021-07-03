@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "ChessBoard.hpp"
 #define INITIAL_BOARD 1
 #include "Locals.h"
@@ -13,9 +14,9 @@ ChessBoard::ChessBoard()
     _chessBoard.setOutlineColor(WHITE_ALPHA);
 
     //棋盘直线的配置
-    _lines.reserve(chooseLineNumber * 2);
-    float propotion = (float) (nineteen -1) / (chooseLineNumber - 1);
-    for (int line_id=1; line_id <= chooseLineNumber; line_id++)
+    _lines.reserve(_chooseLineNumber * 2);
+    float propotion = (float) (nineteen -1) / (_chooseLineNumber - 1);
+    for (int line_id=1; line_id <= _chooseLineNumber; line_id++)
     {
         _line.setFillColor(BLACK);
         _line.setSize(LEVEL_LINE_THICKNESS);
@@ -39,21 +40,21 @@ ChessBoard::ChessBoard()
     {
         for (int circle_vertical_id=0; circle_vertical_id < 3; circle_vertical_id++)
         {
-            switch (chooseLineNumber)
+            switch (_chooseLineNumber)
             {
             case nineteen:
-                circle_x = circle_x_offset + LINE_OFFSET * circle_points_19[circle_level_id] * propotion;
-                circle_y = circle_y_offset + LINE_OFFSET * circle_points_19[circle_vertical_id] * propotion;
+                circle_x = circle_x_offset + LINE_OFFSET * circle_points_19[circle_level_id]     * propotion;
+                circle_y = circle_y_offset + LINE_OFFSET * circle_points_19[circle_vertical_id]  * propotion;
                 _circle.setPosition(circle_x, circle_y);
                 break;
             case thirteen:
-                circle_x = circle_x_offset + LINE_OFFSET * circle_points_13[circle_level_id] * propotion;
-                circle_y = circle_y_offset + LINE_OFFSET * circle_points_13[circle_vertical_id] * propotion;
+                circle_x = circle_x_offset + LINE_OFFSET * circle_points_13[circle_level_id]     * propotion;
+                circle_y = circle_y_offset + LINE_OFFSET * circle_points_13[circle_vertical_id]  * propotion;
                 _circle.setPosition(circle_x, circle_y);
                 break;
             case nine:
-                circle_x = circle_x_offset + LINE_OFFSET * circle_points_9[circle_level_id] * propotion;
-                circle_y = circle_y_offset + LINE_OFFSET * circle_points_9[circle_vertical_id] * propotion;
+                circle_x = circle_x_offset + LINE_OFFSET * circle_points_9[circle_level_id]      * propotion;
+                circle_y = circle_y_offset + LINE_OFFSET * circle_points_9[circle_vertical_id]   * propotion;
                 _circle.setPosition(circle_x, circle_y);
                 break;
             }
@@ -62,22 +63,26 @@ ChessBoard::ChessBoard()
     }
 }
 
+sf::Vector2f ChessBoard::markToPixel(sf::Vector2f& markPoint)
+{
+    return sf::Vector2f(30*markPoint.x -5, 30*markPoint.y - 5);    
+}
+
 void ChessBoard::update(sf::Time deltaTime)
 {
 
 }
 
+
+
 void ChessBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(_chessBoard, states);
     //绘制直线
-    for (auto iter=_lines.begin(); iter != _lines.end(); iter++)
-    {
-        target.draw(*iter, states);
-    }
+    forEach(_lines)          target.draw(*iter, states);
     //绘制让子圆
-    for (auto iter=_circles.begin(); iter != _circles.end(); iter++)
-    {
-        target.draw(*iter, states);
-    }
+    forEach(_circles)        target.draw(*iter, states);
+    //绘制棋子
+    forEach(_whitePieces)    target.draw((*iter)._pieceCircle, states);
+    forEach(_blackPieces)    target.draw((*iter)._pieceCircle, states);
 }

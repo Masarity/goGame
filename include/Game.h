@@ -33,5 +33,5 @@ private:
     //棋盘对象
     ChessBoard _myChessBoard;
     //规则对象
-    GoRule _myGoRole = GoRule(_myChessBoard);    
+    GoRule _myGoRole = GoRule(&_myChessBoard);    
 };

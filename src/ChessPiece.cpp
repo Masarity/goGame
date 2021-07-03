@@ -1,10 +1,13 @@
 #include <iostream>
 #include "ChessPiece.hpp"
+#define PIECE_ARGS 5
+#include "Locals.h"
 
-ChessPiece::ChessPiece(sf::Text pieceNumber, sf::Vector2f piecePosition, sf::Color pieceColor)
+ChessPiece::ChessPiece()
 {
-    _pieceNumber = pieceNumber;
-    _pieceColor  = pieceColor;
+    _pieceCircle.setFillColor(_pieceColor);
+    _pieceCircle.setRadius(PIECE_RADIUS);
+    _raduis = PIECE_RADIUS;
 
 }
 

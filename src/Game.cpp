@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Game.h"
-#define INITIAL_WINDIW 0
+#define INITIAL_MYWINDOW 0
 #include "Locals.h"
 
 Game::Game()
@@ -17,7 +17,7 @@ Game::Game()
     _settings.minorVersion = 1;
     //设置窗口的参数
     /* _window.setPosition(sf::Vector2i(460, 231)); */
-    _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
+    _window.create(sf::VideoMode(MYWINDOW_WIDTH, MYWINDOW_HEIGHT),
                   "goGame", sf::Style::Close, _settings);
     _window.setPosition(sf::Vector2i(460, 231));
 
@@ -65,7 +65,7 @@ void Game::processEvents()
         else if (event.type == sf::Event::MouseMoved)
         {
             /* std::cout << "mouse wa~ moved~~ to: " << event.mouseMove.x << ", " << event.mouseMove.y << std::endl; */
-            /* event.mouseMove */
+            _myGoRole.showAlphaPiece(event.mouseMove);
         }
     }
 }
@@ -83,6 +83,7 @@ void Game::render()
     {
         /* std::cout << "shader is available" << std::endl; */
         _window.draw(_myChessBoard);
+        _window.draw(_myGoRole);
     }
     else
     {

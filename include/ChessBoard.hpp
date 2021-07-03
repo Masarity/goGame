@@ -7,9 +7,10 @@
 
 class ChessBoard: public sf::Drawable 
 {
+    //友元类->围棋规则类
     friend class GoRule;
 public:
-    //拒绝拷贝
+    //拒绝拷贝(拷贝真香)
     /* ChessBoard(const ChessBoard&) = delete; */
     /* ChessBoard& operator=(const ChessBoard&) = delete; */
     //初始化棋盘
@@ -41,10 +42,10 @@ private:
         nineteen = 19,
         thirteen = 13,
         nine     =  9,
-    }chooseLineNumber = nineteen;
+    }_chooseLineNumber = nineteen;
     //棋子（黑白棋）
-    std::stack<ChessPiece> _whitePiece;
-    std::stack<ChessPiece> _blackPiece;   
+    std::vector<ChessPiece> _whitePieces;
+    std::vector<ChessPiece> _blackPieces;   
 
 private:
     //重写渲染虚函数

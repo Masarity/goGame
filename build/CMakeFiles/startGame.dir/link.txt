@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/startGame.dir/src/main.cpp.o CMakeFiles/startGame.dir/src/Game.cpp.o CMakeFiles/startGame.dir/src/ChessBoard.cpp.o CMakeFiles/startGame.dir/src/ChessPiece.cpp.o CMakeFiles/startGame.dir/src/GoRule.cpp.o  -o startGame  -lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio 

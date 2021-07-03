@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/ChessBoard.hpp
+iostream
+-
+SFML/Graphics.hpp
+-
+vector
+-
+stack
+-
+ChessPiece.hpp
+../include/ChessPiece.hpp
+
+../include/ChessPiece.hpp
+iostream
+-
+SFML/Graphics.hpp
+-
+
+../include/Constants.h
+SFML/Graphics.hpp
+-
+
+../include/GoRule.hpp
+SFML/Graphics.hpp
+-
+ChessBoard.hpp
+../include/ChessBoard.hpp
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/GoRule.cpp
+iostream
+-
+Constants.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Constants.h
+GoRule.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/GoRule.hpp
+

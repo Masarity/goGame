@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "ChessBoard.hpp"
 #define INITIAL_BOARD 1
-#include "Locals.h"
+#include "Constants.h"
 
 ChessBoard::ChessBoard()
 {
@@ -63,9 +63,11 @@ ChessBoard::ChessBoard()
     }
 }
 
-sf::Vector2f ChessBoard::markToPixel(sf::Vector2f& markPoint)
+sf::Vector2f ChessBoard::markToPixel(sf::Vector2f& markPoint, float propotion)
 {
-    return sf::Vector2f(30*markPoint.x -5, 30*markPoint.y - 5);    
+    float offset_small = propotion * 5;
+    int   offset_big   = propotion == 1 ? 0 : propotion == 1.5 ? 20 : 50;
+    return sf::Vector2f(LINE_OFFSET * propotion *markPoint.x - (offset_small + offset_big) , LINE_OFFSET * propotion * markPoint.y - (offset_small + offset_big));    
 }
 
 void ChessBoard::update(sf::Time deltaTime)
@@ -83,6 +85,6 @@ void ChessBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const
     //绘制让子圆
     forEach(_circles)        target.draw(*iter, states);
     //绘制棋子
-    forEach(_whitePieces)    target.draw((*iter)._pieceCircle, states);
-    forEach(_blackPieces)    target.draw((*iter)._pieceCircle, states);
+    forEach(_whitePieces)    target.draw((*iter), states);
+    forEach(_blackPieces)    target.draw((*iter), states);
 }

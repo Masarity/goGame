@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Game.h"
 #define INITIAL_MYWINDOW 0
-#include "Locals.h"
+#include "Constants.h"
 
 Game::Game()
 {
@@ -65,7 +65,16 @@ void Game::processEvents()
         else if (event.type == sf::Event::MouseMoved)
         {
             /* std::cout << "mouse wa~ moved~~ to: " << event.mouseMove.x << ", " << event.mouseMove.y << std::endl; */
-            _myGoRole.showAlphaPiece(event.mouseMove);
+            _myGoRole.isPieceUnderCursor(event.mouseMove);
+        }
+        if (event.type == sf::Event::MouseButtonPressed && 
+            event.mouseButton.button == sf::Mouse::Left)
+        {
+            /* event.mouseButton.button */
+            bool putPieceSuccess = false;
+            putPieceSuccess = _myGoRole.addPieceToChessBoard();
+            if (putPieceSuccess)
+                std::cout << "下子OK~" << "\t在像素点: " << event.mouseButton.x << ", " << event.mouseButton.y << std::endl;
         }
     }
 }

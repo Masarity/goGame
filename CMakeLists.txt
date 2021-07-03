@@ -17,7 +17,7 @@ set(FILES_HEADER
     ${INCROOT}/ChessPiece.hpp
     ${INCROOT}/GoRule.hpp
     # ${INCROOT}/CreateStaticElements.hpp
-    ${INCROOT}/Locals.h
+    ${INCROOT}/Constants.h
     )
 
 set(FILES_SRC 

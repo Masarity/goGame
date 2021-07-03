@@ -23,7 +23,8 @@ public:
 private:
     //棋子的编号（记录顺序）
     sf::Font _myFont;
-    sf::Text _pieceNumber;
+    int _pieceNumber;
+    sf::Text _text;
     //棋子的半径
     float _raduis;
     //表示棋子的圆

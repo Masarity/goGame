@@ -10,7 +10,7 @@ class ChessBoard: public sf::Drawable
     //友元类->围棋规则类
     friend class GoRule;
 public:
-    //拒绝拷贝(拷贝真香)
+    //拒绝拷贝(拷贝真bang)
     /* ChessBoard(const ChessBoard&) = delete; */
     /* ChessBoard& operator=(const ChessBoard&) = delete; */
     //初始化棋盘
@@ -24,8 +24,8 @@ public:
     //更新
     void update(sf::Time deltaTime);
     //棋盘坐标与像素坐标的相互转换
-    sf::Vector2f pixelToMark(sf::Vector2f& pixelPoint);
-    sf::Vector2f markToPixel(sf::Vector2f& markPoint);
+    sf::Vector2f pixelToMark(sf::Vector2f& pixelPoint, float propotion);
+    sf::Vector2f markToPixel(sf::Vector2f& markPoint, float propotion);
 
 private:
     //棋盘属性

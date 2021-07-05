@@ -4,28 +4,44 @@
 CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: ../include/ChessBoard.hpp
 CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: ../include/ChessPiece.hpp
 CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: ../include/Constants.h
+CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: ../include/PieceQi.hpp
 CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: ../src/ChessBoard.cpp
 
 CMakeFiles/startGame.dir/src/ChessPiece.cpp.o: ../include/ChessPiece.hpp
 CMakeFiles/startGame.dir/src/ChessPiece.cpp.o: ../include/Constants.h
+CMakeFiles/startGame.dir/src/ChessPiece.cpp.o: ../include/PieceQi.hpp
 CMakeFiles/startGame.dir/src/ChessPiece.cpp.o: ../src/ChessPiece.cpp
 
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../include/ChessBoard.hpp
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../include/ChessPiece.hpp
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../include/Constants.h
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../include/Game.h
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../include/GoRule.hpp
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../src/Game.cpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/ChessBoard.hpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/ChessPiece.hpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/Constants.h
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/GoGame.h
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/GoRule.hpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/PieceQi.hpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../include/StatusPanel.hpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../src/GoGame.cpp
 
 CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../include/ChessBoard.hpp
 CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../include/ChessPiece.hpp
 CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../include/Constants.h
 CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../include/GoRule.hpp
+CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../include/PieceQi.hpp
+CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../include/StatusPanel.hpp
 CMakeFiles/startGame.dir/src/GoRule.cpp.o: ../src/GoRule.cpp
+
+CMakeFiles/startGame.dir/src/PieceQi.cpp.o: ../include/Constants.h
+CMakeFiles/startGame.dir/src/PieceQi.cpp.o: ../include/PieceQi.hpp
+CMakeFiles/startGame.dir/src/PieceQi.cpp.o: ../src/PieceQi.cpp
+
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.o: ../include/Constants.h
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.o: ../include/StatusPanel.hpp
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.o: ../src/StatusPanel.cpp
 
 CMakeFiles/startGame.dir/src/main.cpp.o: ../include/ChessBoard.hpp
 CMakeFiles/startGame.dir/src/main.cpp.o: ../include/ChessPiece.hpp
-CMakeFiles/startGame.dir/src/main.cpp.o: ../include/Game.h
+CMakeFiles/startGame.dir/src/main.cpp.o: ../include/GoGame.h
 CMakeFiles/startGame.dir/src/main.cpp.o: ../include/GoRule.hpp
+CMakeFiles/startGame.dir/src/main.cpp.o: ../include/PieceQi.hpp
+CMakeFiles/startGame.dir/src/main.cpp.o: ../include/StatusPanel.hpp
 CMakeFiles/startGame.dir/src/main.cpp.o: ../src/main.cpp
 

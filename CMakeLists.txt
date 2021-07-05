@@ -12,22 +12,23 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES main.cpp)
 
 set(FILES_HEADER
-    ${INCROOT}/Game.h
+    ${INCROOT}/GoGame.h
     ${INCROOT}/ChessBoard.hpp
     ${INCROOT}/ChessPiece.hpp
     ${INCROOT}/GoRule.hpp
-    # ${INCROOT}/CreateStaticElements.hpp
+    ${INCROOT}/StatusPanel.hpp
     ${INCROOT}/Constants.h
+    ${INCROOT}/PieceQi.hpp
     )
 
 set(FILES_SRC 
     ${SRCROOT}/main.cpp
-    ${SRCROOT}/Game.cpp
+    ${SRCROOT}/GoGame.cpp
     ${SRCROOT}/ChessBoard.cpp
     ${SRCROOT}/ChessPiece.cpp
     ${SRCROOT}/GoRule.cpp
-    # ${SRCROOT}/CreateStaticElements.cpp
-    # ${SRCROOT}/Physics.cpp
+    ${SRCROOT}/StatusPanel.cpp
+    ${SRCROOT}/PieceQi.cpp
     )
 
 add_executable(startGame ${FILES_HEADER} ${FILES_SRC})

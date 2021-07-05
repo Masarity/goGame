@@ -70,18 +70,18 @@ CMakeFiles/startGame.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/startGame.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/masa/Masa/Masa/robos/project/go/goGame/src/main.cpp -o CMakeFiles/startGame.dir/src/main.cpp.s
 
-CMakeFiles/startGame.dir/src/Game.cpp.o: CMakeFiles/startGame.dir/flags.make
-CMakeFiles/startGame.dir/src/Game.cpp.o: ../src/Game.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/startGame.dir/src/Game.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/startGame.dir/src/Game.cpp.o -c /media/masa/Masa/Masa/robos/project/go/goGame/src/Game.cpp
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: CMakeFiles/startGame.dir/flags.make
+CMakeFiles/startGame.dir/src/GoGame.cpp.o: ../src/GoGame.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/startGame.dir/src/GoGame.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/startGame.dir/src/GoGame.cpp.o -c /media/masa/Masa/Masa/robos/project/go/goGame/src/GoGame.cpp
 
-CMakeFiles/startGame.dir/src/Game.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/startGame.dir/src/Game.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/masa/Masa/Masa/robos/project/go/goGame/src/Game.cpp > CMakeFiles/startGame.dir/src/Game.cpp.i
+CMakeFiles/startGame.dir/src/GoGame.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/startGame.dir/src/GoGame.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/masa/Masa/Masa/robos/project/go/goGame/src/GoGame.cpp > CMakeFiles/startGame.dir/src/GoGame.cpp.i
 
-CMakeFiles/startGame.dir/src/Game.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/startGame.dir/src/Game.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/masa/Masa/Masa/robos/project/go/goGame/src/Game.cpp -o CMakeFiles/startGame.dir/src/Game.cpp.s
+CMakeFiles/startGame.dir/src/GoGame.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/startGame.dir/src/GoGame.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/masa/Masa/Masa/robos/project/go/goGame/src/GoGame.cpp -o CMakeFiles/startGame.dir/src/GoGame.cpp.s
 
 CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: CMakeFiles/startGame.dir/flags.make
 CMakeFiles/startGame.dir/src/ChessBoard.cpp.o: ../src/ChessBoard.cpp
@@ -122,22 +122,52 @@ CMakeFiles/startGame.dir/src/GoRule.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/startGame.dir/src/GoRule.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/masa/Masa/Masa/robos/project/go/goGame/src/GoRule.cpp -o CMakeFiles/startGame.dir/src/GoRule.cpp.s
 
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.o: CMakeFiles/startGame.dir/flags.make
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.o: ../src/StatusPanel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/startGame.dir/src/StatusPanel.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/startGame.dir/src/StatusPanel.cpp.o -c /media/masa/Masa/Masa/robos/project/go/goGame/src/StatusPanel.cpp
+
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/startGame.dir/src/StatusPanel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/masa/Masa/Masa/robos/project/go/goGame/src/StatusPanel.cpp > CMakeFiles/startGame.dir/src/StatusPanel.cpp.i
+
+CMakeFiles/startGame.dir/src/StatusPanel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/startGame.dir/src/StatusPanel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/masa/Masa/Masa/robos/project/go/goGame/src/StatusPanel.cpp -o CMakeFiles/startGame.dir/src/StatusPanel.cpp.s
+
+CMakeFiles/startGame.dir/src/PieceQi.cpp.o: CMakeFiles/startGame.dir/flags.make
+CMakeFiles/startGame.dir/src/PieceQi.cpp.o: ../src/PieceQi.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/startGame.dir/src/PieceQi.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/startGame.dir/src/PieceQi.cpp.o -c /media/masa/Masa/Masa/robos/project/go/goGame/src/PieceQi.cpp
+
+CMakeFiles/startGame.dir/src/PieceQi.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/startGame.dir/src/PieceQi.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/masa/Masa/Masa/robos/project/go/goGame/src/PieceQi.cpp > CMakeFiles/startGame.dir/src/PieceQi.cpp.i
+
+CMakeFiles/startGame.dir/src/PieceQi.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/startGame.dir/src/PieceQi.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/masa/Masa/Masa/robos/project/go/goGame/src/PieceQi.cpp -o CMakeFiles/startGame.dir/src/PieceQi.cpp.s
+
 # Object files for target startGame
 startGame_OBJECTS = \
 "CMakeFiles/startGame.dir/src/main.cpp.o" \
-"CMakeFiles/startGame.dir/src/Game.cpp.o" \
+"CMakeFiles/startGame.dir/src/GoGame.cpp.o" \
 "CMakeFiles/startGame.dir/src/ChessBoard.cpp.o" \
 "CMakeFiles/startGame.dir/src/ChessPiece.cpp.o" \
-"CMakeFiles/startGame.dir/src/GoRule.cpp.o"
+"CMakeFiles/startGame.dir/src/GoRule.cpp.o" \
+"CMakeFiles/startGame.dir/src/StatusPanel.cpp.o" \
+"CMakeFiles/startGame.dir/src/PieceQi.cpp.o"
 
 # External object files for target startGame
 startGame_EXTERNAL_OBJECTS =
 
 startGame: CMakeFiles/startGame.dir/src/main.cpp.o
-startGame: CMakeFiles/startGame.dir/src/Game.cpp.o
+startGame: CMakeFiles/startGame.dir/src/GoGame.cpp.o
 startGame: CMakeFiles/startGame.dir/src/ChessBoard.cpp.o
 startGame: CMakeFiles/startGame.dir/src/ChessPiece.cpp.o
 startGame: CMakeFiles/startGame.dir/src/GoRule.cpp.o
+startGame: CMakeFiles/startGame.dir/src/StatusPanel.cpp.o
+startGame: CMakeFiles/startGame.dir/src/PieceQi.cpp.o
 startGame: CMakeFiles/startGame.dir/build.make
 startGame: /usr/lib/libsfml-system.so
 startGame: /usr/lib/libsfml-window.so
@@ -145,7 +175,7 @@ startGame: /usr/lib/libsfml-graphics.so
 startGame: /usr/lib/libsfml-network.so
 startGame: /usr/lib/libsfml-audio.so
 startGame: CMakeFiles/startGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable startGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/masa/Masa/Masa/robos/project/go/goGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable startGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/startGame.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

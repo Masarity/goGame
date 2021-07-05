@@ -177,32 +177,32 @@ src/ChessPiece.cpp.s:
 	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/ChessPiece.cpp.s
 .PHONY : src/ChessPiece.cpp.s
 
-src/Game.o: src/Game.cpp.o
+src/GoGame.o: src/GoGame.cpp.o
 
-.PHONY : src/Game.o
+.PHONY : src/GoGame.o
 
 # target to build an object file
-src/Game.cpp.o:
-	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/Game.cpp.o
-.PHONY : src/Game.cpp.o
+src/GoGame.cpp.o:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoGame.cpp.o
+.PHONY : src/GoGame.cpp.o
 
-src/Game.i: src/Game.cpp.i
+src/GoGame.i: src/GoGame.cpp.i
 
-.PHONY : src/Game.i
+.PHONY : src/GoGame.i
 
 # target to preprocess a source file
-src/Game.cpp.i:
-	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/Game.cpp.i
-.PHONY : src/Game.cpp.i
+src/GoGame.cpp.i:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoGame.cpp.i
+.PHONY : src/GoGame.cpp.i
 
-src/Game.s: src/Game.cpp.s
+src/GoGame.s: src/GoGame.cpp.s
 
-.PHONY : src/Game.s
+.PHONY : src/GoGame.s
 
 # target to generate assembly for a file
-src/Game.cpp.s:
-	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/Game.cpp.s
-.PHONY : src/Game.cpp.s
+src/GoGame.cpp.s:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoGame.cpp.s
+.PHONY : src/GoGame.cpp.s
 
 src/GoRule.o: src/GoRule.cpp.o
 
@@ -230,6 +230,60 @@ src/GoRule.s: src/GoRule.cpp.s
 src/GoRule.cpp.s:
 	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/GoRule.cpp.s
 .PHONY : src/GoRule.cpp.s
+
+src/PieceQi.o: src/PieceQi.cpp.o
+
+.PHONY : src/PieceQi.o
+
+# target to build an object file
+src/PieceQi.cpp.o:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/PieceQi.cpp.o
+.PHONY : src/PieceQi.cpp.o
+
+src/PieceQi.i: src/PieceQi.cpp.i
+
+.PHONY : src/PieceQi.i
+
+# target to preprocess a source file
+src/PieceQi.cpp.i:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/PieceQi.cpp.i
+.PHONY : src/PieceQi.cpp.i
+
+src/PieceQi.s: src/PieceQi.cpp.s
+
+.PHONY : src/PieceQi.s
+
+# target to generate assembly for a file
+src/PieceQi.cpp.s:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/PieceQi.cpp.s
+.PHONY : src/PieceQi.cpp.s
+
+src/StatusPanel.o: src/StatusPanel.cpp.o
+
+.PHONY : src/StatusPanel.o
+
+# target to build an object file
+src/StatusPanel.cpp.o:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/StatusPanel.cpp.o
+.PHONY : src/StatusPanel.cpp.o
+
+src/StatusPanel.i: src/StatusPanel.cpp.i
+
+.PHONY : src/StatusPanel.i
+
+# target to preprocess a source file
+src/StatusPanel.cpp.i:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/StatusPanel.cpp.i
+.PHONY : src/StatusPanel.cpp.i
+
+src/StatusPanel.s: src/StatusPanel.cpp.s
+
+.PHONY : src/StatusPanel.s
+
+# target to generate assembly for a file
+src/StatusPanel.cpp.s:
+	$(MAKE) -f CMakeFiles/startGame.dir/build.make CMakeFiles/startGame.dir/src/StatusPanel.cpp.s
+.PHONY : src/StatusPanel.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -273,12 +327,18 @@ help:
 	@echo "... src/ChessPiece.o"
 	@echo "... src/ChessPiece.i"
 	@echo "... src/ChessPiece.s"
-	@echo "... src/Game.o"
-	@echo "... src/Game.i"
-	@echo "... src/Game.s"
+	@echo "... src/GoGame.o"
+	@echo "... src/GoGame.i"
+	@echo "... src/GoGame.s"
 	@echo "... src/GoRule.o"
 	@echo "... src/GoRule.i"
 	@echo "... src/GoRule.s"
+	@echo "... src/PieceQi.o"
+	@echo "... src/PieceQi.i"
+	@echo "... src/PieceQi.s"
+	@echo "... src/StatusPanel.o"
+	@echo "... src/StatusPanel.i"
+	@echo "... src/StatusPanel.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -3,17 +3,19 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "ChessBoard.hpp"
+#include "StatusPanel.hpp"
 #include "GoRule.hpp"
 
-class Game
+//围棋游戏类
+class GoGame
 {
 public:
     //删除拷贝构造
-    Game(const Game&) = delete;
+    GoGame(const GoGame&) = delete;
     //删除赋值
-    Game& operator=(const Game&) = delete;
+    GoGame& operator=(const GoGame&) = delete;
     //游戏构造函数
-    Game();
+    GoGame();
     //游戏启动函数（刷新帧率）
     void run(int frame_per_second);
 
@@ -32,6 +34,8 @@ private:
     sf::RenderWindow _window;
     //棋盘对象
     ChessBoard _myChessBoard;
+    //状态面板对象
+    StatusPanel _myStatusPanel;
     //规则对象
-    GoRule _myGoRole = GoRule(&_myChessBoard);    
+    GoRule _myGoRole = GoRule(&_myChessBoard, &_myStatusPanel);    
 };

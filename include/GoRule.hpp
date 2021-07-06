@@ -63,7 +63,7 @@ private:
     //棋谱
     int  _chessManualStatic[21][21] = {{0}};
     int  _chessManualDynamic[21][21] = {{0}};
-    //棋盘状态队列（保存3个）（出现问题了，悔棋出现问题，之后想一波）
+    //棋盘状态队列（保存2个）（出现问题了，悔棋会出现问题，之后想一波）
     std::queue<int[21][21]> _chessBoardStatus;
     //棋子的分组元组
     int _pieceGroupName[21][21] = {{0}};

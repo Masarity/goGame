@@ -47,6 +47,17 @@ void PieceQi::setTrue()
 }
 
 
+bool PieceQi::isQiExistence()
+{
+    forEach( _pieceQi )
+    {
+        if ((*iter).second)
+            return true;
+    }
+    return false;
+}
+
+
 sf::Vector2f PieceQi::markToPixel(sf::Vector2f markPoint)
 {
     //公式照旧

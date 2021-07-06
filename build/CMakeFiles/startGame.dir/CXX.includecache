@@ -13,7 +13,7 @@ SFML/Graphics.hpp
 -
 vector
 -
-stack
+map
 -
 ChessPiece.hpp
 ../include/ChessPiece.hpp
@@ -74,6 +74,24 @@ iostream
 SFML/Graphics.hpp
 -
 
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessBoard.cpp
+iostream
+-
+algorithm
+-
+ChessBoard.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessBoard.hpp
+Constants.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Constants.h
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessPiece.cpp
+iostream
+-
+ChessPiece.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/ChessPiece.hpp
+Constants.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Constants.h
+
 /media/masa/Masa/Masa/robos/project/go/goGame/src/GoGame.cpp
 iostream
 -
@@ -89,6 +107,22 @@ Constants.h
 /media/masa/Masa/Masa/robos/project/go/goGame/src/Constants.h
 GoRule.hpp
 /media/masa/Masa/Masa/robos/project/go/goGame/src/GoRule.hpp
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/PieceQi.cpp
+iostream
+-
+PieceQi.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/PieceQi.hpp
+Constants.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Constants.h
+
+/media/masa/Masa/Masa/robos/project/go/goGame/src/StatusPanel.cpp
+iostream
+-
+StatusPanel.hpp
+/media/masa/Masa/Masa/robos/project/go/goGame/src/StatusPanel.hpp
+Constants.h
+/media/masa/Masa/Masa/robos/project/go/goGame/src/Constants.h
 
 /media/masa/Masa/Masa/robos/project/go/goGame/src/main.cpp
 iostream

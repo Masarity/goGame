@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <stack>
+#include <map>
 #include "ChessPiece.hpp"
 
 class ChessBoard: public sf::Drawable 
@@ -26,6 +26,8 @@ public:
     //棋盘坐标与像素坐标的相互转换
     sf::Vector2f pixelToMark(sf::Vector2f& pixelPoint);
     sf::Vector2f markToPixel(sf::Vector2f& markPoint);
+    //查找棋盘上对应点的棋子（map查找）key是标记坐标
+    ChessPiece* findChessPiece(sf::Vector2f markPoint);
 
 private:
     //棋盘属性
@@ -48,8 +50,8 @@ private:
     //下子点的标记坐标
     std::string _markPoint;
     //棋子（黑白棋）
-    std::vector<ChessPiece> _whitePieces;
-    std::vector<ChessPiece> _blackPieces;   
+    std::map<int, ChessPiece> _whitePieces;
+    std::map<int, ChessPiece> _blackPieces;   
 
 private:
     //重写渲染虚函数

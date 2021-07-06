@@ -33,6 +33,7 @@ void GoRule::isPieceUnderCursor(sf::Event::MouseMoveEvent& mouse)
         int piecePoint_y = basePoint_y + (carry_y > MIN_BOUND / _myChessBoardPoint->_propotion ? ONE : ZERO);
         _markPoint = sf::Vector2f(piecePoint_x, piecePoint_y);
         _alphaPiece._markPoint = _markPoint;
+        _alphakey = (int)_markPoint.x + (int)_markPoint.y * 10;
         staticUpdateDynamic();
         //状态面板上显示标记坐标
         std::string showText = "At: ";
@@ -54,15 +55,17 @@ void GoRule::isPieceUnderCursor(sf::Event::MouseMoveEvent& mouse)
             //不显示悬停棋子
             _showAlphaPiece = false;
             //显示黑棋的气
-            controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, true  );
+            /* controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, true  ); */
+            showTheGoupQiUnderCursor( &_myChessBoardPoint->_blackPieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]);
             //不显示白棋的气
-            controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, false );           
+            controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, false);           
             return;
         }
         else if (checkPieceExistence(_myChessBoardPoint->_whitePieces, _markPoint))
         {
             _showAlphaPiece = false;
-            controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, true  );
+            /* controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, true  ); */
+            showTheGoupQiUnderCursor( &_myChessBoardPoint->_whitePieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]);
             controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, false );
             return;
         }
@@ -77,14 +80,27 @@ void GoRule::isPieceUnderCursor(sf::Event::MouseMoveEvent& mouse)
         _showAlphaPiece = false;
 }
 
-void GoRule::controlPieceVectorQi(std::vector<ChessPiece>* chessPiece, bool isVisible, bool reset)
+void GoRule::controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece, bool isVisible, bool reset)
 {
     forEach( (*chessPiece) )
     {
-        (*iter).isQiVisible(isVisible);
-        (*iter).isNumberVisible(isVisible);
-        if (reset)  (*iter)._pieceQi.setTrue();
+        (*iter).second.isQiVisible(isVisible);
+        (*iter).second.isNumberVisible(isVisible);
+        if (reset)  (*iter).second._pieceQi.setTrue();
     }
+}
+
+void GoRule::showTheGoupQiUnderCursor(std::map<int, ChessPiece>* chessPiece, int groupName)
+{
+    forEach( (*chessPiece) )
+    {
+        if ((*iter).second._pieceGroup == groupName)
+        {
+            (*iter).second.isQiVisible(true);
+            (*iter).second.isNumberVisible(true);
+        }
+    }
+
 }
 
 bool GoRule::addPieceToChessBoard()
@@ -108,16 +124,17 @@ bool GoRule::addPieceToChessBoard()
         chessPiece._text.setPosition(chessPiece._pixelPoint.x + chessPiece._raduis/4, chessPiece._pixelPoint.y);
         chessPiece._text.setCharacterSize(chessPiece._raduis);
         /* chessPiece._pieceGroup = _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]; */
+        int key = (int)_markPoint.x + (int)_markPoint.y * 10;
         if (_player)
         {
             chessPiece._text.setFillColor(PLAYER_WHITE);
-            _myChessBoardPoint->_blackPieces.push_back(chessPiece);
+            _myChessBoardPoint->_blackPieces.insert(std::pair<int, ChessPiece>(key, chessPiece));
             _chessManualStatic[(int)_markPoint.y][(int)_markPoint.x] = 1;
         }
         else
         {
             chessPiece._text.setFillColor(PLAYER_BLACK);
-            _myChessBoardPoint->_whitePieces.push_back(chessPiece);
+            _myChessBoardPoint->_whitePieces.insert(std::pair<int, ChessPiece>(key, chessPiece));
             _chessManualStatic[(int)_markPoint.y][(int)_markPoint.x] = 2;
         }
         //交换棋手
@@ -199,6 +216,16 @@ void GoRule::updatePieceGroup()
         {
             if (_pieceGroupName[i][j] != 0)
             {
+                int key = j + i * 10;
+                if (key == _alphakey)
+                {
+                    _alphaPiece._pieceGroup = _pieceGroupName[i][j];
+                }
+                auto piece_pointer = _myChessBoardPoint->findChessPiece(sf::Vector2f(j, i));
+                if (piece_pointer != nullptr)
+                {
+                    piece_pointer->_pieceGroup = _pieceGroupName[i][j];
+                }
 
             }
         }
@@ -206,31 +233,31 @@ void GoRule::updatePieceGroup()
 }
 
 
-void GoRule::updatePieceQiByAlphaPiece(std::vector<ChessPiece>* chessPiece)
+void GoRule::updatePieceQiByAlphaPiece(std::map<int, ChessPiece>* chessPiece)
 {
     forEach( (*chessPiece) )
     {
-        for (auto it = (*iter)._pieceQi._pieceQi.begin(); it != (*iter)._pieceQi._pieceQi.end(); it++)
+        for (auto it = (*iter).second._pieceQi._pieceQi.begin(); it != (*iter).second._pieceQi._pieceQi.end(); it++)
         {
-            if (sf::Vector2f((*iter)._markPoint.x + (*iter)._pieceQi._qiOffset[(*it).first][0],
-                             (*iter)._markPoint.y + (*iter)._pieceQi._qiOffset[(*it).first][1]) == _alphaPiece._markPoint)
+            if (sf::Vector2f((*iter).second._markPoint.x + (*iter).second._pieceQi._qiOffset[(*it).first][0],
+                             (*iter).second._markPoint.y + (*iter).second._pieceQi._qiOffset[(*it).first][1]) == _alphaPiece._markPoint)
                 (*it).second = false;
         }
     }
 }
 
 
-void GoRule::updateSingleColorPieceQi(std::vector<ChessPiece>* chessPiece)
+void GoRule::updateSingleColorPieceQi(std::map<int, ChessPiece>* chessPiece)
 {
     forEach( (*chessPiece) )
     {
-        for (auto it = (*iter)._pieceQi._pieceQi.begin(); it != (*iter)._pieceQi._pieceQi.end(); it++)
+        for (auto it = (*iter).second._pieceQi._pieceQi.begin(); it != (*iter).second._pieceQi._pieceQi.end(); it++)
         {
-            if (checkPieceExistence(_myChessBoardPoint->_blackPieces, sf::Vector2f((*iter)._markPoint.x + (*iter)._pieceQi._qiOffset[(*it).first][0],
-                                                                                   (*iter)._markPoint.y + (*iter)._pieceQi._qiOffset[(*it).first][1])))
+            if (checkPieceExistence(_myChessBoardPoint->_blackPieces, sf::Vector2f((*iter).second._markPoint.x + (*iter).second._pieceQi._qiOffset[(*it).first][0],
+                                                                                   (*iter).second._markPoint.y + (*iter).second._pieceQi._qiOffset[(*it).first][1])))
                 (*it).second = false;
-            if (checkPieceExistence(_myChessBoardPoint->_whitePieces, sf::Vector2f((*iter)._markPoint.x + (*iter)._pieceQi._qiOffset[(*it).first][0],
-                                                                                   (*iter)._markPoint.y + (*iter)._pieceQi._qiOffset[(*it).first][1])))
+            if (checkPieceExistence(_myChessBoardPoint->_whitePieces, sf::Vector2f((*iter).second._markPoint.x + (*iter).second._pieceQi._qiOffset[(*it).first][0],
+                                                                                   (*iter).second._markPoint.y + (*iter).second._pieceQi._qiOffset[(*it).first][1])))
                 (*it).second = false;
 
         }
@@ -248,13 +275,12 @@ void GoRule::updatePieceQi()
     updatePieceQiByAlphaPiece(&_myChessBoardPoint->_blackPieces);
 }
 
-bool GoRule::checkPieceExistence(std::vector<ChessPiece>& pieces, sf::Vector2f markPoint)
+bool GoRule::checkPieceExistence(std::map<int, ChessPiece>& pieces, sf::Vector2f markPoint)
 {
-    forEach( pieces )
-    {
-        if ((*iter)._markPoint == markPoint)
-            return true;
-    }
+    int key = (int)markPoint.x + (int)markPoint.y * 10;
+    auto piece_iter = pieces.find(key);
+    if (piece_iter != pieces.end())
+        return true;
     return false;
 }
 

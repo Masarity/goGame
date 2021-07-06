@@ -13,8 +13,8 @@ public:
     //围棋规则类构造函数
     GoRule(ChessBoard* chessBoard, StatusPanel* statusPanel);
     //检查是否有棋子存在
-    bool checkPieceExistence(std::vector<ChessPiece>& pieces, sf::CircleShape circleShape);
-    bool checkPieceExistence(std::vector<ChessPiece>& pieces, sf::Vector2f markPoint);
+    bool checkPieceExistence(std::map<int, ChessPiece>& pieces, sf::CircleShape circleShape);
+    bool checkPieceExistence(std::map<int, ChessPiece>& pieces, sf::Vector2f markPoint);
     //检查光标下是否有棋子，若没有则显示悬停棋子
     void isPieceUnderCursor(sf::Event::MouseMoveEvent& mouse);
     //添加棋子到棋盘->把悬停棋子改个颜色，添加到棋盘对应的vector数组里,添加成功返回true
@@ -22,15 +22,15 @@ public:
     //更新悬停棋子的气
     void updateAlphaPieceQi();
     //通过悬停的棋子更新棋盘上棋子的气
-    void updatePieceQiByAlphaPiece(std::vector<ChessPiece>* chessPiece);
+    void updatePieceQiByAlphaPiece(std::map<int, ChessPiece>* chessPiece);
     //更新一种颜色棋子的气
-    void updateSingleColorPieceQi(std::vector<ChessPiece>* chessPiece);
+    void updateSingleColorPieceQi(std::map<int, ChessPiece>* chessPiece);
     //更新棋盘棋子的气
     void updatePieceQi();
     //显示光标所在棋子对应组的气&数字
-    void showTheGoupQiUnderCursor();
-    //控制是否显示传入棋子容器指针所含的气&数字
-    void controlPieceVectorQi(std::vector<ChessPiece>* chessPiece, bool isVisible, bool reset=false);
+    void showTheGoupQiUnderCursor(std::map<int, ChessPiece>* chessPiece, int groupName);
+    //控制是否显示传入棋子指针所含的气&数字
+    void controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece, bool isVisible, bool reset=false);
     //终端输出棋谱
     void showChessManual();
     void staticUpdateDynamic();
@@ -38,6 +38,10 @@ public:
     int greedySearch(int groupName, int markName, int markPoint[]);
     void dividePieceGroups();
     void updatePieceGroup();
+    //棋子不存在条件(如果是棋盘上的棋子，那么它们会变半透明；若是悬停棋子，那么会在棋子上出现一个红色的X)
+    bool isPieceExistence(ChessPiece* chessPiece);
+    //删除无气的棋子(通过标记坐标点来找棋子并删除，压到被吃棋子栈(并且计数)->为悔棋做准备)
+    void removeNoneQiPiece(sf::Vector2f markPoint);
 
 private:
     //棋盘指针
@@ -48,8 +52,10 @@ private:
     sf::Vector2f _markPoint;
     //是否显示悬停棋子bool量
     bool _showAlphaPiece = false;
+    bool _isAlphaPieceExistence = true;
     //悬停的棋子对象
     ChessPiece _alphaPiece;
+    int _alphakey;
     //棋子计数
     int _pieceCount = 0;
     //棋手颜色(true -> black; false -> white)
@@ -61,7 +67,7 @@ private:
     std::queue<int[21][21]> _chessBoardStatus;
     //棋子的分组元组
     int _pieceGroupName[21][21] = {{0}};
-    /* std::map<int, std::vector<ChessPiece>> _pieceGroups; */
+    std::map<int, std::vector<ChessPiece>> _pieceGroups;
     //被吃棋子个数栈
     std::stack<int> _capturedPiecesCount;
     //被吃棋子储存栈

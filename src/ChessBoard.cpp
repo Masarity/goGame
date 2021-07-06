@@ -91,6 +91,22 @@ sf::Vector2f ChessBoard::pixelToMark(sf::Vector2f& pixelPoint)
     return sf::Vector2f((int)((pixelPoint.x + (offset_small + offset_big))/(LINE_OFFSET * _propotion)), (int)((pixelPoint.y + (offset_small + offset_big))/(LINE_OFFSET * _propotion)));
 }
 
+ChessPiece* ChessBoard::findChessPiece(sf::Vector2f markPoint)
+{
+    int key = (int)markPoint.x + (int)markPoint.y * 10;
+    auto piece_black = _blackPieces.find(key);
+    auto piece_white = _whitePieces.find(key);
+    if (piece_black != _blackPieces.end())
+    {
+        return &(*piece_black).second;
+    }
+    if (piece_white != _whitePieces.end())
+    {
+        return &(*piece_white).second;
+    }
+    return nullptr;
+}
+
 void ChessBoard::update(sf::Time deltaTime)
 {
 
@@ -107,6 +123,6 @@ void ChessBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const
     //绘制让子圆
     forEach(_handicapCircles)        target.draw(*iter, states);
     //绘制棋子
-    forEach(_whitePieces)    target.draw(*iter, states);
-    forEach(_blackPieces)    target.draw(*iter, states);
+    forEach(_whitePieces)    target.draw((*iter).second, states);
+    forEach(_blackPieces)    target.draw((*iter).second, states);
 }

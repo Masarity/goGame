@@ -75,6 +75,7 @@ void GoGame::processEvents()
             _myGoRole.isPieceUnderCursor(event.mouseMove);
             _myGoRole.showChessManual();
             _myGoRole.dividePieceGroups();
+            _myGoRole.updatePieceGroup();
         }
         //左键点击下子
         if (event.type == sf::Event::MouseButtonPressed && 

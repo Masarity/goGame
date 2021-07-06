@@ -23,6 +23,9 @@ public:
     //将四个方位的气都显示为真
     void setTrue();
 
+    //判断棋子是否还有气
+    bool isQiExistence();
+
 
 private:
     //对应棋子的标记位置

@@ -36,7 +36,7 @@ StatusPanel::StatusPanel()
         _showMarkPoint.setFont(_myFont);
         _showMarkPoint.setString("");
         _showMarkPoint.setFillColor(TEXT_COLOR);
-        _showMarkPoint.setPosition(DIVISION_LINE_POSITION.x + LINE_OFFSET, DIVISION_LINE_POSITION.y + LINE_OFFSET);
+        _showMarkPoint.setPosition(DIVISION_LINE_POSITION.x + LINE_OFFSET, DIVISION_LINE_POSITION.y - LINE_OFFSET*5);
         _showMarkPoint.setCharacterSize(LINE_OFFSET * 1.5);
     }
 }

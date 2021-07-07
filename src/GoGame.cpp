@@ -68,23 +68,16 @@ void GoGame::processEvents()
         else if (event.type == sf::Event::MouseMoved)
         {
             /* std::cout << "mouse wa~ moved~~ to: " << event.mouseMove.x << ", " << event.mouseMove.y << std::endl; */
-            //棋子跟随
-            _myGoRole.isPieceUnderCursor(event.mouseMove);
-            _myGoRole.updateAlphaPieceQi();
-            _myGoRole.updatePieceQi();
-            _myGoRole.isPieceUnderCursor(event.mouseMove);
-            _myGoRole.showChessManual();
-            _myGoRole.dividePieceGroups();
-            _myGoRole.updatePieceGroup();
+            //动态更新棋盘
+            _myGoRole.dynamicChessBoard(event.mouseMove);
         }
         //左键点击下子
         if (event.type == sf::Event::MouseButtonPressed && 
             event.mouseButton.button == sf::Mouse::Left)
         {
-            bool putPieceSuccess = false;
-            putPieceSuccess = _myGoRole.addPieceToChessBoard();
-            _myGoRole.showChessManual();
-            /* _myGoRole.updatePieceQi(); */
+            /* bool putPieceSuccess = false; */
+            /* putPieceSuccess = _myGoRole.addPieceToChessBoard(); */
+            _myGoRole.updateChessBoard();
             /* if (!putPieceSuccess) */
             /*     std::cout << "下子失败~" << "\t在像素点: " << event.mouseButton.x << ", " << event.mouseButton.y << "请在棋盘内下子" << std::endl; */
         }

@@ -24,7 +24,7 @@ public:
     void setTrue();
 
     //判断棋子是否还有气
-    bool isQiExistence();
+    int isQiExistence();
 
 
 private:

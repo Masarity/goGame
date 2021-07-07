@@ -69,7 +69,8 @@
 #define DIVISION_LINE_POSITION sf::Vector2f(627,   382)
 #define DIVISION_LINE_SIZE     sf::Vector2f(364.f, 2.f)
 #define DIVISION_LINE_COLOR    sf::Color(1, 2, 3, 80)
-#define CHESS_MANUAL_POSITION  sf::Vector2f(700,   382)
+/* #define CHESS_MANUAL_POSITION  sf::Vector2f(700,   382) */
+#define CHESS_MANUAL_POSITION  sf::Vector2f(640,   382)
 #define CHESS_MANUAL_SIZE      sf::Vector2f(218,   218)
 #define CHESS_MANUAL_FONT_SIZE 11
 #endif
@@ -80,7 +81,7 @@
 #define WHITE_QI_COLOR sf::Color(255, 255, 255, 60)
 #define BLACK_QI_COLOR sf::Color(0,   0,   0,   60)
 #define QI_RADIUS      7
-#define CIRCLE_OFFSET -5.5
+#define CIRCLE_OFFSET -6
 #define BOARD_OFFSET   9
 #define LINE_OFFSET    30
 #define forEach(container)    for (auto iter=container.begin(); iter != container.end(); iter++)

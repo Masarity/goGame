@@ -12,11 +12,17 @@ class GoRule: public sf::Drawable
 public:
     //围棋规则类构造函数
     GoRule(ChessBoard* chessBoard, StatusPanel* statusPanel);
-    //检查是否有棋子存在
+    //检查是否有棋子存在(函数重载：通过标记坐标点或棋子图形对象都可以检查)
     bool checkPieceExistence(std::map<int, ChessPiece>& pieces, sf::CircleShape circleShape);
     bool checkPieceExistence(std::map<int, ChessPiece>& pieces, sf::Vector2f markPoint);
     //检查光标下是否有棋子，若没有则显示悬停棋子
-    void isPieceUnderCursor(sf::Event::MouseMoveEvent& mouse);
+    void mouseEvent(sf::Event::MouseMoveEvent& mouse);
+    //随着光标动态更新各种状态参数
+    void dynamicChessBoard(sf::Event::MouseMoveEvent& mouse);
+    //更新状态面板
+    void updateStatusPanel();
+    //鼠标左击后刷新棋盘
+    void updateChessBoard();
     //添加棋子到棋盘->把悬停棋子改个颜色，添加到棋盘对应的vector数组里,添加成功返回true
     bool addPieceToChessBoard();
     //更新悬停棋子的气
@@ -28,20 +34,34 @@ public:
     //更新棋盘棋子的气
     void updatePieceQi();
     //显示光标所在棋子对应组的气&数字
+    void showPieceQi();
     void showTheGoupQiUnderCursor(std::map<int, ChessPiece>* chessPiece, int groupName);
     //控制是否显示传入棋子指针所含的气&数字
     void controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece, bool isVisible, bool reset=false);
-    //终端输出棋谱
+    void controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece);
+
+    /* 棋谱这一块可以优化，实际上一个数组再外带一个变量就行，这样悔棋也好做了，做悔棋模块的时候，再改~ */
+
+    //终端输出棋谱(棋盘上棋子的分组状态可视化：调试小有用)
     void showChessManual();
+    //每次一次刷新后都要用静态的棋谱去重置动态棋谱
     void staticUpdateDynamic();
+
     //贪搜棋子分组
     int greedySearch(int groupName, int markName, int markPoint[]);
+    //分组棋子，调用贪搜
     void dividePieceGroups();
+    //将棋子的分组情况反映到棋子的属性上去(其实可以和终端输出棋谱一起写，但是总归要分出来的~)
     void updatePieceGroup();
     //棋子不存在条件(如果是棋盘上的棋子，那么它们会变半透明；若是悬停棋子，那么会在棋子上出现一个红色的X)
-    bool isPieceExistence(ChessPiece* chessPiece);
+    int isPieceAlive(ChessPiece* chessPiece);
     //删除无气的棋子(通过标记坐标点来找棋子并删除，压到被吃棋子栈(并且计数)->为悔棋做准备)
-    void removeNoneQiPiece(sf::Vector2f markPoint);
+    /* void removeNoneQiPiece(sf::Vector2f markPoint); */
+    void removeNoneQiPiece(int key);
+    //重置无气棋子的状态，把透明状态改回来，红色的X不显示
+    void resetNoneQiPiece();
+    //查找没有气的棋子
+    void findNoneQiPieces();
 
 private:
     //棋盘指针
@@ -65,9 +85,11 @@ private:
     int  _chessManualDynamic[21][21] = {{0}};
     //棋盘状态队列（保存2个）（出现问题了，悔棋会出现问题，之后想一波）
     std::queue<int[21][21]> _chessBoardStatus;
-    //棋子的分组元组
+    //棋子的分组map
     int _pieceGroupName[21][21] = {{0}};
     std::map<int, std::vector<ChessPiece>> _pieceGroups;
+    //无气棋子的vector
+    std::vector<int> _NoneQiPiece;
     //被吃棋子个数栈
     std::stack<int> _capturedPiecesCount;
     //被吃棋子储存栈

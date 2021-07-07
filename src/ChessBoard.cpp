@@ -93,7 +93,22 @@ sf::Vector2f ChessBoard::pixelToMark(sf::Vector2f& pixelPoint)
 
 ChessPiece* ChessBoard::findChessPiece(sf::Vector2f markPoint)
 {
-    int key = (int)markPoint.x + (int)markPoint.y * 10;
+    int key = (int)markPoint.x + (int)markPoint.y * 19;
+    auto piece_black = _blackPieces.find(key);
+    auto piece_white = _whitePieces.find(key);
+    if (piece_black != _blackPieces.end())
+    {
+        return &(*piece_black).second;
+    }
+    if (piece_white != _whitePieces.end())
+    {
+        return &(*piece_white).second;
+    }
+    return nullptr;
+}
+
+ChessPiece* ChessBoard::findChessPiece(int key)
+{
     auto piece_black = _blackPieces.find(key);
     auto piece_white = _whitePieces.find(key);
     if (piece_black != _blackPieces.end())

@@ -13,6 +13,7 @@ PieceQi::PieceQi()
 std::map<int, bool>* PieceQi::initializeQi(sf::Vector2f pieceMarkPoint, bool player, float propotion)
 {
     _propotion = propotion;
+    _pieceMarkPoint = pieceMarkPoint;
     //气的颜色
     _qiColor = player ? BLACK_QI_COLOR : WHITE_QI_COLOR;
     //究极关键，避免内存泄漏，保证气的状态正确
@@ -47,14 +48,15 @@ void PieceQi::setTrue()
 }
 
 
-bool PieceQi::isQiExistence()
+int PieceQi::isQiExistence()
 {
+    int key = (int)_pieceMarkPoint.x + (int)_pieceMarkPoint.y * 19;
     forEach( _pieceQi )
     {
         if ((*iter).second)
-            return true;
+            return false;
     }
-    return false;
+    return key;
 }
 
 

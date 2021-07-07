@@ -28,6 +28,7 @@ public:
     sf::Vector2f markToPixel(sf::Vector2f& markPoint);
     //查找棋盘上对应点的棋子（map查找）key是标记坐标
     ChessPiece* findChessPiece(sf::Vector2f markPoint);
+    ChessPiece* findChessPiece(int key);
 
 private:
     //棋盘属性

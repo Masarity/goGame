@@ -5,10 +5,19 @@
 
 GoRule::GoRule(ChessBoard* chessBoard, StatusPanel* statusPanel)
 {
+    /* bool isLoadSuccess = _myFont.loadFromFile("../res/fonts/FreeSans.ttf"); */   
     //拿到棋盘的指针，操作它（应用围棋的规则）
     _myChessBoardPoint = chessBoard;
     //拿到状态面板的指针，操作它
     _myStatusPanelPoint = statusPanel;
+
+    //红叉基本配置
+    /* if (isLoadSuccess) */
+    /* { */
+    /*     _myText.setFont(_myFont); */
+    /*     _myText.setString("X"); */
+    /*     _myText.setFillColor(COLOR_ALPHA); */
+    /* } */
 }
 
 void GoRule::staticUpdateDynamic()
@@ -25,10 +34,10 @@ void GoRule::dynamicChessBoard(sf::Event::MouseMoveEvent& mouse)
     updateAlphaPieceQi();
     updatePieceQi();
     dividePieceGroups();
-    showChessManual();
     updatePieceGroup();
     showPieceQi();
     findNoneQiPieces();
+    showChessManual();
 }
 
 void GoRule::mouseEvent(sf::Event::MouseMoveEvent& mouse)
@@ -62,21 +71,14 @@ void GoRule::mouseEvent(sf::Event::MouseMoveEvent& mouse)
         {
             //不显示悬停棋子
             _showAlphaPiece = false;
+            _alphakey = 0;
             //显示黑棋的气
-            /* showTheGoupQiUnderCursor( &_myChessBoardPoint->_blackPieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]); */
-            /* controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, false); */
-            /* showTheGoupQiUnderCursor( &_myChessBoardPoint->_blackPieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]); */
-            /* //不显示白棋的气 */
-            /* controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, false); */           
             return;
         }
         else if (checkPieceExistence(_myChessBoardPoint->_whitePieces, _markPoint))
         {
             _showAlphaPiece = false;
-            /* showTheGoupQiUnderCursor( &_myChessBoardPoint->_whitePieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]); */
-            /* controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, false); */
-            /* showTheGoupQiUnderCursor( &_myChessBoardPoint->_whitePieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]); */
-            /* controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, false ); */
+            _alphakey = 0;
             return;
         }
         //如果光标在棋盘空地处，那么不显示棋盘上棋子的气,并且重置棋盘上棋子气的状态
@@ -103,11 +105,22 @@ void GoRule::updateStatusPanel()
 
 void GoRule::updateChessBoard()
 {
-    addPieceToChessBoard();
-    forEach( _NoneQiPiece )
+    if (addPieceToChessBoard())
     {
-        std::cout << "remove key:" << (*iter) << std::endl;
-        removeNoneQiPiece((*iter));
+        _capturedPiecesCount.push((int)_NoneQiPiece.size());
+        forEach( _NoneQiPiece )
+        {
+            std::cout << "remove key:" << (*iter) << std::endl;
+            removeNoneQiPiece((*iter));
+        }
+        _repentance.push( _capturedPiecesCount.top() ? true : false);
+        //棋谱入队
+        if ((int)_chessBoardStatus.size() == 2)
+            _chessBoardStatus.pop();
+        for (int i=1; i<=19; i++)
+            for (int j=1; j<=19; j++)
+                _cms.manual[i][j] = _chessManualStatic[i][j];
+        _chessBoardStatus.push(_cms);
     }
 }
 
@@ -133,8 +146,6 @@ void GoRule::showPieceQi()
         if (checkPieceExistence(_myChessBoardPoint->_blackPieces, _markPoint))
         {
             //显示黑棋的气
-            /* showTheGoupQiUnderCursor( &_myChessBoardPoint->_blackPieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]); */
-            controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, false);
             showTheGoupQiUnderCursor( &_myChessBoardPoint->_blackPieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]);
             //不显示白棋的气
             controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, false);           
@@ -142,8 +153,6 @@ void GoRule::showPieceQi()
         }
         else if (checkPieceExistence(_myChessBoardPoint->_whitePieces, _markPoint))
         {
-            /* showTheGoupQiUnderCursor( &_myChessBoardPoint->_whitePieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]); */
-            controlPieceVectorQi( &_myChessBoardPoint->_whitePieces, false);
             showTheGoupQiUnderCursor( &_myChessBoardPoint->_whitePieces, _pieceGroupName[(int)_markPoint.y][(int)_markPoint.x]);
             controlPieceVectorQi( &_myChessBoardPoint->_blackPieces, false );
             return;
@@ -169,7 +178,8 @@ void GoRule::showTheGoupQiUnderCursor(std::map<int, ChessPiece>* chessPiece, int
 bool GoRule::addPieceToChessBoard()
 {
     //如果显示悬停棋子
-    if (_showAlphaPiece)
+    /* std::cout << "_isAlphaPieceExistence:\t" << _isAlphaPieceExistence << std::endl; */
+    if (_showAlphaPiece && _isAlphaPieceExistence)
     {
         //累加棋子数
         _pieceCount++;
@@ -202,8 +212,9 @@ bool GoRule::addPieceToChessBoard()
         }
         //交换棋手
         _player = !_player;
-        return true;
+       return true;
     }
+    std::cout << "这里下子犯规呐~" << std::endl;
     return false;
 }
 
@@ -306,7 +317,6 @@ void GoRule::updatePieceGroup()
                 if (key == _alphakey)
                 {
                     _alphaPiece._pieceGroup = _pieceGroupName[i][j];
-                    return;
                 }
                 auto piece_pointer = _myChessBoardPoint->findChessPiece(sf::Vector2f(j, i));
                 if (piece_pointer != nullptr)
@@ -320,11 +330,7 @@ void GoRule::updatePieceGroup()
 }
 
 int GoRule::isPieceAlive(ChessPiece* chessPiece)
-{
-    if (_alphaPiece._pieceQi.isQiExistence())
-    {
-        //如果悬停棋子处于无气状态的判断~
-    }
+{  
     if (chessPiece->_player)
     {
         //如果该棋子和悬停棋子属于同一组且悬停棋子有气
@@ -344,13 +350,17 @@ int GoRule::isPieceAlive(ChessPiece* chessPiece)
     else 
     {
         if (chessPiece->_pieceGroup == _alphaPiece._pieceGroup && !_alphaPiece._pieceQi.isQiExistence())
+        {
+            /* std::cout << "mark1\t" << "cpg:\t" << chessPiece->_pieceGroup << "\tapg:\t" << _alphaPiece._pieceGroup << std::endl; */
             return false;
+        }
         forEach( _myChessBoardPoint->_whitePieces )
         {
             if (((*iter).second._pieceNumber != chessPiece->_pieceNumber) && ((*iter).second._pieceGroup == chessPiece->_pieceGroup) && !(*iter).second._pieceQi.isQiExistence())
+            {
+                /* std::cout << "mark2\n"; */
                 return false;
-            else if ((*iter).second._pieceGroup == _alphaPiece._pieceGroup && _alphaPiece._pieceQi.isQiExistence())
-                return false;
+            }
         }
     }
     //最后是返回棋子本身的气的状态
@@ -381,17 +391,25 @@ void GoRule::removeNoneQiPiece(int key)
     {   
         std::cout << "remove:~" << std::endl;
         _chessManualStatic[key/19][key%19] = 0;
+        _capturedPieces.push((*piece_iter_black).second);
         _myChessBoardPoint->_blackPieces.erase(piece_iter_black);
     }
     else if (piece_iter_white != _myChessBoardPoint->_whitePieces.end())
     {
-        _myChessBoardPoint->_whitePieces.erase(piece_iter_white);
         _chessManualStatic[key/19][key%19] = 0;
+        _capturedPieces.push((*piece_iter_white).second);
+        _myChessBoardPoint->_whitePieces.erase(piece_iter_white);
     }
 }
 
 void GoRule::resetNoneQiPiece()
 {
+    if (!_alphaPiece._pieceQi.isQiExistence())
+    {
+        _isAlphaPieceExistence = true;
+        _alphaPiece._text.setFillColor(COLOR_ALPHA);
+    }
+
     forEach( _NoneQiPiece )
     {
         //调用棋盘提供的查找函数(类型比较长：用auto自动推导)
@@ -403,17 +421,20 @@ void GoRule::resetNoneQiPiece()
     _NoneQiPiece.clear();
 }
 
-
 void GoRule::findNoneQiPieces()
 {
     //查找前先重置
     resetNoneQiPiece();
+    bool whiteFlag = false, blackFlag = false;
+
     forEach( _myChessBoardPoint->_blackPieces )
     {
         int key = isPieceAlive(&(*iter).second);
         if (key)
         {
+            whiteFlag = true;
             _NoneQiPiece.push_back(key);
+            _chessManualDynamic[key/19][key%19] = 0;
         }
     }
     forEach( _myChessBoardPoint->_whitePieces )
@@ -421,15 +442,65 @@ void GoRule::findNoneQiPieces()
         int key = isPieceAlive(&(*iter).second);
         if (key)
         {
+            blackFlag = true;
             _NoneQiPiece.push_back(key);
+            _chessManualDynamic[key/19][key%19] = 0;
         }
     }
+
     //改透明色
     forEach( _NoneQiPiece )
     {
         auto piece_iter = _myChessBoardPoint->findChessPiece((*iter));
         piece_iter->_pieceCircle.setFillColor(piece_iter->_player ? BLACK_ALPHA:WHITE_ALPHA);
     }
+
+    if (_alphaPiece._pieceQi.isQiExistence())
+    {
+        /* std::cout << "wf:\t" << whiteFlag << "\tbf:\t" << blackFlag << "\tap:\t" << _alphaPiece._player << std::endl; */
+        //如果悬停棋子处于无气状态的判断~
+        if (((!_alphaPiece._player && whiteFlag) || (_alphaPiece._player && blackFlag)) && (((int)_chessBoardStatus.size() == 2) && (isRepeatedBoardPosition())))
+            return;
+        else if (isPieceAlive(&_alphaPiece))
+        {
+            _alphaPiece._text.setFillColor(RED);
+            _alphaPiece._text.setString("X");
+            _alphaPiece._text.setPosition(_alphaPiece._pixelPoint.x + _alphaPiece._raduis/3, _alphaPiece._pixelPoint.y - X_OFFSET_Y);
+            _alphaPiece._text.setCharacterSize(X_SIZE);
+            _isAlphaPieceExistence = false;
+        }
+        //全局同形判断
+    }
+}
+
+bool GoRule::isRepeatedBoardPosition()
+{
+    /* std::cout << "cms:\n"; */
+    /* for (int i=1; i<=19; i++) */
+    /* { */
+    /*     for (int j=1; j<=19; j++) */
+    /*     { */
+    /*         std::cout << _chessBoardStatus.front().manual[i][j] << " "; */
+    /*     } */
+    /*     std::cout << '\n'; */
+    /* } */
+ 
+    /* std::cout << "cmd:\n"; */
+    /* for (int i=1; i<=19; i++) */
+    /* { */
+    /*     for (int j=1; j<=19; j++) */
+    /*     { */
+    /*         std::cout << _chessManualDynamic[i][j] << " "; */
+    /*     } */
+    /*     std::cout << '\n'; */
+    /* } */
+ 
+
+    for (int i=1; i<=19; i++)
+        for (int j=1; j<=19; j++)
+            if (_chessBoardStatus.front().manual[i][j] != _chessManualDynamic[i][j])
+                return true;
+    return false;
 }
 
 void GoRule::updatePieceQiByAlphaPiece(std::map<int, ChessPiece>* chessPiece)
@@ -464,6 +535,7 @@ void GoRule::updateSingleColorPieceQi(std::map<int, ChessPiece>* chessPiece)
 void GoRule::updatePieceQi()
 {
     _alphaPiece.isQiVisible(true);
+    _alphaPiece.isNumberVisible(true);
     //先更新棋盘上棋子之间的气，然后在根据悬停棋子的位置改变棋盘上棋子的气
     controlPieceVectorQi( &_myChessBoardPoint->_blackPieces);   
     controlPieceVectorQi( &_myChessBoardPoint->_whitePieces);

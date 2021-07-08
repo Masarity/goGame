@@ -41,12 +41,12 @@ public:
     void controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece);
 
     /* 棋谱这一块可以优化，实际上一个数组再外带一个变量就行，这样悔棋也好做了，做悔棋模块的时候，再改~ */
+    //优化棋谱（首先定义）
 
     //终端输出棋谱(棋盘上棋子的分组状态可视化：调试小有用)
     void showChessManual();
     //每次一次刷新后都要用静态的棋谱去重置动态棋谱
     void staticUpdateDynamic();
-
     //贪搜棋子分组
     int greedySearch(int groupName, int markName, int markPoint[]);
     //分组棋子，调用贪搜
@@ -62,6 +62,8 @@ public:
     void resetNoneQiPiece();
     //查找没有气的棋子
     void findNoneQiPieces();
+    //是否全局同形
+    bool isRepeatedBoardPosition();
 
 private:
     //棋盘指针
@@ -76,6 +78,8 @@ private:
     //悬停的棋子对象
     ChessPiece _alphaPiece;
     int _alphakey;
+    sf::Font _myFont;
+    sf::Text _myText;
     //棋子计数
     int _pieceCount = 0;
     //棋手颜色(true -> black; false -> white)
@@ -83,8 +87,14 @@ private:
     //棋谱
     int  _chessManualStatic[21][21] = {{0}};
     int  _chessManualDynamic[21][21] = {{0}};
+    //记录下子的key值
+    /* std::vector<int> _chessManualStorage; */
     //棋盘状态队列（保存2个）（出现问题了，悔棋会出现问题，之后想一波）
-    std::queue<int[21][21]> _chessBoardStatus;
+    struct _chessManualStatus
+    {
+        int manual[21][21] = {{0}};
+    }_cms;
+    std::queue<_chessManualStatus> _chessBoardStatus;
     //棋子的分组map
     int _pieceGroupName[21][21] = {{0}};
     std::map<int, std::vector<ChessPiece>> _pieceGroups;
@@ -94,8 +104,8 @@ private:
     std::stack<int> _capturedPiecesCount;
     //被吃棋子储存栈
     std::stack<ChessPiece> _capturedPieces;
-    //悔棋 (map) -> (key,value) -> key=棋子计数 ；value: true -> 退回被吃棋子&前一手棋； false -> 退回前一手棋；
-    std::map<int, bool> repentance;
+    //悔棋 (stack<bool>) -> 没有没吃棋子false，有被吃棋子数true
+    std::stack<bool> _repentance;
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

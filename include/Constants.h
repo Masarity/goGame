@@ -49,7 +49,10 @@
 #define WHITE_ALPHA     sf::Color(255, 255, 255, 30)
 #define PLAYER_BLACK    sf::Color(0, 0, 0)
 #define BLACK_ALPHA     sf::Color(0, 0, 0, 30)
+#define COLOR_ALPHA     sf::Color(0, 0, 0, 0)
 #define RED             sf::Color(255, 0, 0)
+#define X_SIZE          30
+#define X_OFFSET_Y      4
 #define PIECE_QI_OFFSET {{0, -1}, {0, 1}, {-1, 0}, {1, 0}}
 //遍历宏
 #define forEach(container)    for (auto iter=container.begin(); iter != container.end(); iter++)

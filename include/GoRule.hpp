@@ -24,7 +24,7 @@ public:
     //鼠标左击后刷新棋盘
     void updateChessBoard();
     //添加棋子到棋盘->把悬停棋子改个颜色，添加到棋盘对应的vector数组里,添加成功返回true
-    bool addPieceToChessBoard();
+    int  addPieceToChessBoard();
     //更新悬停棋子的气
     void updateAlphaPieceQi();
     //通过悬停的棋子更新棋盘上棋子的气
@@ -34,6 +34,7 @@ public:
     //更新棋盘棋子的气
     void updatePieceQi();
     //显示光标所在棋子对应组的气&数字
+    void isQiAndNumberVisible(bool control);
     void showPieceQi();
     void showTheGoupQiUnderCursor(std::map<int, ChessPiece>* chessPiece, int groupName);
     //控制是否显示传入棋子指针所含的气&数字
@@ -64,12 +65,18 @@ public:
     void findNoneQiPieces();
     //是否全局同形
     bool isRepeatedBoardPosition();
+    //悔棋
+    void repentance();
+    void returnCapturedPieces(std::pair<int, ChessPiece> chessPiece);
+    void deletePiece(int key);
 
 private:
     //棋盘指针
     ChessBoard* _myChessBoardPoint;
     //状态面板指针
     StatusPanel* _myStatusPanelPoint;
+    //是否显示棋子的气和数字
+    bool _showVisualizaions = false;
     //保存光标的标记坐标
     sf::Vector2f _markPoint;
     //是否显示悬停棋子bool量
@@ -78,8 +85,6 @@ private:
     //悬停的棋子对象
     ChessPiece _alphaPiece;
     int _alphakey;
-    sf::Font _myFont;
-    sf::Text _myText;
     //棋子计数
     int _pieceCount = 0;
     //棋手颜色(true -> black; false -> white)
@@ -103,9 +108,9 @@ private:
     //被吃棋子个数栈
     std::stack<int> _capturedPiecesCount;
     //被吃棋子储存栈
-    std::stack<ChessPiece> _capturedPieces;
+    std::stack<std::pair<int,ChessPiece>> _capturedPieces;
     //悔棋 (stack<bool>) -> 没有没吃棋子false，有被吃棋子数true
-    std::stack<bool> _repentance;
+    std::stack<std::pair<int, bool>> _repentance;
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

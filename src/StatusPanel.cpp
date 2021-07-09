@@ -39,11 +39,51 @@ StatusPanel::StatusPanel()
         _showMarkPoint.setPosition(DIVISION_LINE_POSITION.x + LINE_OFFSET, DIVISION_LINE_POSITION.y - LINE_OFFSET*5);
         _showMarkPoint.setCharacterSize(LINE_OFFSET * 1.5);
     }
+
+    //黑白棋状态的显示
+    _blackFrame.setPosition(BLACK_FRAME_POSITION);
+    _blackFrame.setFillColor(BLACK_FRAME_COLOR);
+    _blackFrame.setSize(BLACK_FRAME_SIZE);
+    _whiteFrame.setPosition(WHITE_FRAME_POSITION);
+    _whiteFrame.setFillColor(WHITE_FRAME_COLOR);
+    _whiteFrame.setSize(BLACK_FRAME_SIZE);
+    _blackFramePosition = BLACK_FRAME_POSITION;
+    _whiteFramePosition = WHITE_FRAME_POSITION;
+    _blackFrameSize = BLACK_FRAME_SIZE;
+    _whiteFrameSize = WHITE_FRAME_SZIE;
 }
 
 
 void StatusPanel::update(sf::Time deltaTime)
 {
+    if (count >= 0)
+    {
+        count--;
+        float blackFrameVelocity_pos = wh_v;
+        float blackFrameVelocity_size = size_v;
+        if (count == 10)
+        {
+            wh_v = -wh_v;
+            size_v = -size_v;
+            count = 20;
+        }
+        if (_blackFrameSize.y > 0 && _blackFrameSize.y < 30)
+            _blackFrame.setFillColor(_blackFrame.getFillColor() == BLACK_FRAME_COLOR ? WHITE_FRAME_COLOR : BLACK_FRAME_COLOR);
+        if (_blackFramePosition.y < 117)
+        {
+            blackFrameVelocity_size = -size_v;
+        }
+        _blackFramePosition.y += deltaTime.asSeconds() * blackFrameVelocity_pos;
+        _blackFrameSize.y += deltaTime.asSeconds() * blackFrameVelocity_size;
+
+        _blackFrame.setPosition(_blackFramePosition);
+        _blackFrame.setSize(_blackFrameSize);
+        /* if (count == 0) */
+        /* { */
+        /*     wh_v = 255; */
+        /*     size_v = 450; */
+        /* } */
+    }
 }
 
 
@@ -54,4 +94,6 @@ void StatusPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_showMarkPoint, states);
     target.draw(_divisionLine, states);
     target.draw(_showChessManual, states);
+    target.draw(_blackFrame, states);
+    target.draw(_whiteFrame, states);
 }

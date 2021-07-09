@@ -11,13 +11,6 @@ GoRule::GoRule(ChessBoard* chessBoard, StatusPanel* statusPanel)
     //拿到状态面板的指针，操作它
     _myStatusPanelPoint = statusPanel;
 
-    //红叉基本配置
-    /* if (isLoadSuccess) */
-    /* { */
-    /*     _myText.setFont(_myFont); */
-    /*     _myText.setString("X"); */
-    /*     _myText.setFillColor(COLOR_ALPHA); */
-    /* } */
 }
 
 void GoRule::staticUpdateDynamic()
@@ -35,7 +28,8 @@ void GoRule::dynamicChessBoard(sf::Event::MouseMoveEvent& mouse)
     updatePieceQi();
     dividePieceGroups();
     updatePieceGroup();
-    showPieceQi();
+    if (_showVisualizaions)
+        showPieceQi();
     findNoneQiPieces();
     showChessManual();
 }
@@ -105,15 +99,21 @@ void GoRule::updateStatusPanel()
 
 void GoRule::updateChessBoard()
 {
-    if (addPieceToChessBoard())
+    int key = addPieceToChessBoard();
+    if (key)
     {
-        _capturedPiecesCount.push((int)_NoneQiPiece.size());
         forEach( _NoneQiPiece )
         {
             std::cout << "remove key:" << (*iter) << std::endl;
             removeNoneQiPiece((*iter));
         }
-        _repentance.push( _capturedPiecesCount.top() ? true : false);
+        if (!_NoneQiPiece.empty())
+        {
+            std::cout << "count=\t" << (int)_NoneQiPiece.size() << std::endl;
+            _capturedPiecesCount.push((int)_NoneQiPiece.size());
+        }
+     
+        _repentance.push( std::pair<int, bool>(key, (int)_NoneQiPiece.size() ? true : false));
         //棋谱入队
         if ((int)_chessBoardStatus.size() == 2)
             _chessBoardStatus.pop();
@@ -121,6 +121,7 @@ void GoRule::updateChessBoard()
             for (int j=1; j<=19; j++)
                 _cms.manual[i][j] = _chessManualStatic[i][j];
         _chessBoardStatus.push(_cms);
+        /* _myStatusPanelPoint->count = 20; */
     }
 }
 
@@ -139,6 +140,11 @@ void GoRule::controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece)
 {
     forEach( (*chessPiece) )
         (*iter).second._pieceQi.setTrue();
+}
+
+void GoRule::isQiAndNumberVisible(bool control)
+{
+    _showVisualizaions = control;
 }
 
 void GoRule::showPieceQi()
@@ -175,7 +181,7 @@ void GoRule::showTheGoupQiUnderCursor(std::map<int, ChessPiece>* chessPiece, int
 
 }
 
-bool GoRule::addPieceToChessBoard()
+int GoRule::addPieceToChessBoard()
 {
     //如果显示悬停棋子
     /* std::cout << "_isAlphaPieceExistence:\t" << _isAlphaPieceExistence << std::endl; */
@@ -212,7 +218,9 @@ bool GoRule::addPieceToChessBoard()
         }
         //交换棋手
         _player = !_player;
-       return true;
+        _isAlphaPieceExistence = false;
+        /* std::cout << "key:\t" << key << std::endl; */
+        return key;
     }
     std::cout << "这里下子犯规呐~" << std::endl;
     return false;
@@ -389,15 +397,15 @@ void GoRule::removeNoneQiPiece(int key)
     auto piece_iter_white = _myChessBoardPoint->_whitePieces.find(key);
     if (piece_iter_black != _myChessBoardPoint->_blackPieces.end())
     {   
-        std::cout << "remove:~" << std::endl;
+        /* std::cout << "remove:~" << std::endl; */
         _chessManualStatic[key/19][key%19] = 0;
-        _capturedPieces.push((*piece_iter_black).second);
+        _capturedPieces.push(std::pair<int, ChessPiece>(key, (*piece_iter_black).second));
         _myChessBoardPoint->_blackPieces.erase(piece_iter_black);
     }
     else if (piece_iter_white != _myChessBoardPoint->_whitePieces.end())
     {
         _chessManualStatic[key/19][key%19] = 0;
-        _capturedPieces.push((*piece_iter_white).second);
+        _capturedPieces.push(std::pair<int, ChessPiece>(key, (*piece_iter_white).second));
         _myChessBoardPoint->_whitePieces.erase(piece_iter_white);
     }
 }
@@ -552,6 +560,69 @@ bool GoRule::checkPieceExistence(std::map<int, ChessPiece>& pieces, sf::Vector2f
     if (piece_iter != pieces.end())
         return true;
     return false;
+}
+
+void GoRule::repentance()
+{
+    if (_repentance.empty())
+        return;
+    /* std::cout << _repentance.top().second << std::endl; */
+    /* std::cout << _repentance.top().first << std::endl; */
+    deletePiece(_repentance.top().first);
+    _pieceCount--;
+    _player = !_player;
+    _isAlphaPieceExistence = true;
+    _alphaPiece._pieceCircle.setFillColor(_player ? BLACK_ALPHA : WHITE_ALPHA);
+    updateAlphaPieceQi();
+    if (_repentance.top().second)
+    {
+        if (_capturedPieces.empty() || _capturedPiecesCount.empty())
+            return;
+        std::cout << "return~" <<  _repentance.top().second << "_capturedPiecesCount:\t" << _capturedPiecesCount.top() << std::endl;
+        for (int i=0; i<_capturedPiecesCount.top(); i++)
+        {
+            returnCapturedPieces(_capturedPieces.top());
+            _capturedPieces.pop();
+        }
+        _capturedPiecesCount.pop();
+    }
+    _repentance.pop();
+}
+
+void GoRule::returnCapturedPieces(std::pair<int, ChessPiece> chessPiece)
+{
+    int key = chessPiece.first;
+    std::cout << "key:\t" << key << std::endl;
+    if (chessPiece.second._player)
+    {
+        chessPiece.second._pieceCircle.setFillColor(PLAYER_BLACK);
+        _myChessBoardPoint->_blackPieces.insert(chessPiece);
+        _chessManualStatic[key/19][key%19] = 1;
+    }
+    else
+    {
+        chessPiece.second._pieceCircle.setFillColor(PLAYER_WHITE);
+        _myChessBoardPoint->_whitePieces.insert(chessPiece);
+        _chessManualStatic[key/19][key%19] = 2;
+    }
+}
+
+void GoRule::deletePiece(int key)
+{
+    auto piece_iter_black = _myChessBoardPoint->_blackPieces.find(key);
+    auto piece_iter_white = _myChessBoardPoint->_whitePieces.find(key);
+    if (piece_iter_black != _myChessBoardPoint->_blackPieces.end())
+    {   
+        /* std::cout << "remove:~" << std::endl; */
+        _chessManualStatic[key/19][key%19] = 0;
+        _myChessBoardPoint->_blackPieces.erase(piece_iter_black);
+    }
+    else if (piece_iter_white != _myChessBoardPoint->_whitePieces.end())
+    {
+        _chessManualStatic[key/19][key%19] = 0;
+        _myChessBoardPoint->_whitePieces.erase(piece_iter_white);
+    }
+
 }
 
 void GoRule::draw(sf::RenderTarget& target, sf::RenderStates states) const

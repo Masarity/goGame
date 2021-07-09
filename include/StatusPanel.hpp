@@ -22,6 +22,20 @@ private:
     sf::Font _myFont;
     std::string _markPoint;
     sf::Text _showMarkPoint;
+    //黑白棋子状态框
+    sf::RectangleShape _blackFrame;
+    sf::RectangleShape _whiteFrame;
+    sf::Vector2f _blackFramePosition;
+    sf::Vector2f _whiteFramePosition;
+    sf::Vector2f _blackFrameSize;
+    sf::Vector2f _whiteFrameSize;
+    /* float wh_v = 85; */
+    /* float size_v = 150; */
+    float wh_v = 255;
+    float size_v = 450;
+   
+    int count = 20;
+    int cc = 0;
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

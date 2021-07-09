@@ -81,12 +81,26 @@ void GoGame::processEvents()
             /* if (!putPieceSuccess) */
             /*     std::cout << "下子失败~" << "\t在像素点: " << event.mouseButton.x << ", " << event.mouseButton.y << "请在棋盘内下子" << std::endl; */
         }
+        if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Tab))
+        {
+            _myGoRole.isQiAndNumberVisible(true);
+        }
+        else if ((event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::Tab))
+        {
+            _myGoRole.isQiAndNumberVisible(false);
+        }
+        else if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Z))
+        {
+            /* std::cout << "悔棋~\n"; */
+            _myGoRole.repentance();
+        }
     }
 }
 
 void GoGame::update(sf::Time deltaTime)
 {
-    _myChessBoard.update(deltaTime);
+    /* _myChessBoard.update(deltaTime); */
+    /* _myStatusPanel.update(deltaTime); */
 }
 
 void GoGame::render()

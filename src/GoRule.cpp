@@ -89,11 +89,14 @@ void GoRule::mouseEvent(sf::Event::MouseMoveEvent& mouse)
 void GoRule::updateStatusPanel()
 {
         //状态面板上显示标记坐标
-        std::string showText = "At: ";
+        std::string showText = "Pos\t->\t";
         showText += _myChessBoardPoint->_markPoint.substr(_markPoint.x, ONE);
         showText += ", ";
         showText += std::to_string(_myChessBoardPoint->_chooseLineNumber + 1 - (int)_markPoint.y);
-        _myStatusPanelPoint->_showMarkPoint.setString(showText);
+        if (_myStatusPanelPoint->_refreshBMP)
+            _myStatusPanelPoint->_blackMarkPoint.setString(showText);
+        else
+            _myStatusPanelPoint->_whiteMarkPoint.setString(showText);
 
 }
 
@@ -124,13 +127,14 @@ void GoRule::updateChessBoard()
         /* _myStatusPanelPoint->count = 20; */
         if (_player)
         {
+            _myStatusPanelPoint->_refreshBMP = true;
             _myStatusPanelPoint->_blackClock.restart();
             _myStatusPanelPoint->_blackTimerController = true;
             _myStatusPanelPoint->_whiteTimerController = false;
         }
         else
         {
- 
+            _myStatusPanelPoint->_refreshBMP = false;
             _myStatusPanelPoint->_whiteClock.restart();
             _myStatusPanelPoint->_whiteTimerController = true;           
             _myStatusPanelPoint->_blackTimerController = false;
@@ -158,6 +162,7 @@ void GoRule::controlPieceVectorQi(std::map<int, ChessPiece>* chessPiece)
 void GoRule::isQiAndNumberVisible(bool control)
 {
     _showVisualizaions = control;
+    showPieceQi();
 }
 
 void GoRule::showPieceQi()
@@ -540,7 +545,7 @@ void GoRule::updateSingleColorPieceQi(std::map<int, ChessPiece>* chessPiece)
 
 void GoRule::updatePieceQi()
 {
-    _alphaPiece.isQiVisible(true);
+    /* _alphaPiece.isQiVisible(true); */
     _alphaPiece.isNumberVisible(true);
     //先更新棋盘上棋子之间的气，然后在根据悬停棋子的位置改变棋盘上棋子的气
     controlPieceVectorQi( &_myChessBoardPoint->_blackPieces);   
@@ -574,6 +579,20 @@ void GoRule::repentance()
     _isAlphaPieceExistence = true;
     _alphaPiece._pieceCircle.setFillColor(_player ? BLACK_ALPHA : WHITE_ALPHA);
     updateAlphaPieceQi();
+    if (_player)
+    {
+        _myStatusPanelPoint->_refreshBMP = true;
+        _myStatusPanelPoint->_blackClock.restart();
+        _myStatusPanelPoint->_blackTimerController = true;
+        _myStatusPanelPoint->_whiteTimerController = false;
+    }
+    else
+    {
+        _myStatusPanelPoint->_refreshBMP = false;
+        _myStatusPanelPoint->_whiteClock.restart();
+        _myStatusPanelPoint->_whiteTimerController = true;           
+        _myStatusPanelPoint->_blackTimerController = false;
+    }
     //若有被吃棋子，一起退回，并且棋谱也一并退回
     if (_repentance.top().second)
     {

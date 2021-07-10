@@ -65,8 +65,10 @@
 #define PANEL_POSITION_Y 0
 #define LINE_OFFSET 9
 #define TEXT_COLOR sf::Color(159, 18, 139)
+#define POS_OFFSET       sf::Vector2f(20, 53.5)
 /* #define PANEL_COLOR sf::Color(74, 159, 140) */
-#define PANEL_COLOR sf::Color(97, 176, 96)
+/* #define PANEL_COLOR sf::Color(97, 176, 96) */
+#define PANEL_COLOR sf::Color(32,178,170)
 /* #define PANEL_ALPHA     sf::Color(153, 51, 205, 80) */
 #define PANEL_ALPHA            sf::Color(97, 176, 96, 80)
 #define DIVISION_LINE_POSITION sf::Vector2f(627,   382)
@@ -82,6 +84,8 @@
 #define WHITE_FRAME_POSITION   sf::Vector2f(829, 32)
 #define BLACK_FRAME_SIZE       sf::Vector2f(120, 150)
 #define WHITE_FRAME_SZIE       sf::Vector2f(120, 150)
+#define BLACK_FRAME_OL_COLOR   sf::Color(255, 255, 255, 80)
+#define WHITE_FRAME_OL_COLOR   sf::Color(0, 0, 0, 80)
 #define BLACK_TIMER_COLOR      sf::Color(255, 255, 255, 80)
 #define WHITE_TIMER_COLOR      sf::Color(0, 0, 0, 80)
 #define BLACK_TIMER_OFFSET     sf::Vector2f(20, 20)

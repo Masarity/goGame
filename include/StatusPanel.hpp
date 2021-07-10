@@ -21,7 +21,11 @@ private:
     //下子点的标记坐标
     sf::Font _myFont;
     std::string _markPoint;
-    sf::Text _showMarkPoint;
+    sf::Text _blackMarkPoint;
+    bool _refreshBMP = true;
+    sf::Text _whiteMarkPoint;
+    /* bool _refreshWMP = false; */
+
     //黑白棋子状态框
     sf::RectangleShape _blackFrame;
     sf::RectangleShape _whiteFrame;

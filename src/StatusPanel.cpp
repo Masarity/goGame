@@ -29,44 +29,51 @@ StatusPanel::StatusPanel()
     _showChessManual.setOutlineColor(sf::Color(0, 0, 0, 80));
 
 
-    //坐标显示的配置
-    if (isLoadSuccess)
-    {
-        std::cout << "Font loading successflly~" << std::endl;
-        _showMarkPoint.setFont(_myFont);
-        _showMarkPoint.setString("");
-        _showMarkPoint.setFillColor(TEXT_COLOR);
-        _showMarkPoint.setPosition(DIVISION_LINE_POSITION.x + LINE_OFFSET, DIVISION_LINE_POSITION.y - LINE_OFFSET*5);
-        _showMarkPoint.setCharacterSize(LINE_OFFSET * 1.5);
-    }
 
     //黑白棋状态的显示
     _blackFrame.setPosition(BLACK_FRAME_POSITION);
     _blackFrame.setFillColor(BLACK_FRAME_COLOR);
     _blackFrame.setSize(BLACK_FRAME_SIZE);
+    _blackFrame.setOutlineThickness(LINE_OFFSET);
+    _blackFrame.setOutlineColor(BLACK_FRAME_OL_COLOR);
     _whiteFrame.setPosition(WHITE_FRAME_POSITION);
     _whiteFrame.setFillColor(WHITE_FRAME_COLOR);
     _whiteFrame.setSize(BLACK_FRAME_SIZE);
+    _whiteFrame.setOutlineThickness(LINE_OFFSET);
+    _whiteFrame.setOutlineColor(WHITE_FRAME_OL_COLOR);
+
     /* _blackFramePosition = BLACK_FRAME_POSITION; */
     /* _whiteFramePosition = WHITE_FRAME_POSITION; */
     /* _blackFrameSize = BLACK_FRAME_SIZE; */
     /* _whiteFrameSize = WHITE_FRAME_SZIE; */
-    //计时器的配置
     if (isLoadSuccess)
     {
+        //计时器的配置
         _blackTimer.setFont(_myFont);
-        _blackTimer.setString("00:00:00");
+        _blackTimer.setString("Time ->00:00:00");
         _blackTimer.setFillColor(BLACK_TIMER_COLOR);
         _blackTimer.setPosition(BLACK_FRAME_POSITION + BLACK_TIMER_OFFSET);
         _blackTimer.setCharacterSize(LINE_OFFSET * 1.5);
         _blackClock.restart();
         _whiteTimer.setFont(_myFont);
-        _whiteTimer.setString("00:00:00");
+        _whiteTimer.setString("Time ->00:00:00");
         _whiteTimer.setFillColor(WHITE_TIMER_COLOR);
         _whiteTimer.setPosition(WHITE_FRAME_POSITION + WHITE_TIMER_OFFSET);
         _whiteTimer.setCharacterSize(LINE_OFFSET * 1.5);
         _whiteClock.restart();
 
+        //坐标显示的配置
+        std::cout << "Font loading successflly~" << std::endl;
+        _blackMarkPoint.setFont(_myFont);
+        _blackMarkPoint.setString("Pos\t->");
+        _blackMarkPoint.setFillColor(BLACK_TIMER_COLOR);
+        _blackMarkPoint.setPosition(BLACK_FRAME_POSITION + POS_OFFSET);
+        _blackMarkPoint.setCharacterSize(LINE_OFFSET * 1.5);
+        _whiteMarkPoint.setFont(_myFont);
+        _whiteMarkPoint.setString("Pos\t->");
+        _whiteMarkPoint.setFillColor(WHITE_TIMER_COLOR);
+        _whiteMarkPoint.setPosition(WHITE_FRAME_POSITION + POS_OFFSET);
+        _whiteMarkPoint.setCharacterSize(LINE_OFFSET * 1.5);
     }
 }
 
@@ -75,7 +82,7 @@ void StatusPanel::update(sf::Time deltaTime)
 {
     if (_blackTimerController)
     {
-        std::string blackClock = "";
+        std::string blackClock = "Time ->";
         /* int dms = _blackClock.getElapsedTime().asMilliseconds(); */
         _blackDMS += _blackClock.restart().asMilliseconds();
         /* int ds = dms / 1000; */
@@ -101,7 +108,7 @@ void StatusPanel::update(sf::Time deltaTime)
     }
     if (_whiteTimerController)
     {
-        std::string whiteClock = "";
+        std::string whiteClock = "Time ->";
         /* int dms = _whiteClock.getElapsedTime().asMilliseconds(); */
         _whiteDMS += _whiteClock.restart().asMilliseconds();
         /* int ds = dms / 1000; */
@@ -132,13 +139,14 @@ void StatusPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     //绘制状态面板&棋盘标记点
     target.draw(_panelBoard, states);
-    target.draw(_showMarkPoint, states);
     target.draw(_divisionLine, states);
     target.draw(_showChessManual, states);
     target.draw(_blackFrame, states);
     target.draw(_whiteFrame, states);
     target.draw(_blackTimer, states);
     target.draw(_whiteTimer, states);
+    target.draw(_blackMarkPoint, states);
+    target.draw(_whiteMarkPoint, states);
 }
 
 //花里胡哨

@@ -79,17 +79,21 @@
 #define BLACK_FRAME_COLOR      sf::Color(0, 0, 0, 50)
 #define WHITE_FRAME_COLOR      sf::Color(255, 255, 255, 50)
 #define BLACK_FRAME_POSITION   sf::Vector2f(669, 32)
-#define WHITE_FRAME_POSITION   sf::Vector2f(669, 200)
-#define BLACK_FRAME_SIZE       sf::Vector2f(280, 150)
-#define WHITE_FRAME_SZIE       sf::Vector2f(280, 150)
-#define DOWN_SPEED_WH1         sf::Vector2f(125, 300)
-#define DOWN_SPEED_WH2         sf::Vector2f(-125, 300)
-#define DOWN_SPEED_SIZE1       -340
-#define DOWN_SPEED_SIZE2       340
-#define UP_SPEED_WH1           sf::Vector2f(125, -300)
-#define UP_SPEED_WH2           sf::Vector2f(-125, -300)
-#define UP_SPEED_SIZE1         -340
-#define UP_SPEED_SIZE2         340
+#define WHITE_FRAME_POSITION   sf::Vector2f(829, 32)
+#define BLACK_FRAME_SIZE       sf::Vector2f(120, 150)
+#define WHITE_FRAME_SZIE       sf::Vector2f(120, 150)
+#define BLACK_TIMER_COLOR      sf::Color(255, 255, 255, 80)
+#define WHITE_TIMER_COLOR      sf::Color(0, 0, 0, 80)
+#define BLACK_TIMER_OFFSET     sf::Vector2f(20, 20)
+#define WHITE_TIMER_OFFSET     sf::Vector2f(20, 20)
+/* #define DOWN_SPEED_WH1         sf::Vector2f(125, 300) */
+/* #define DOWN_SPEED_WH2         sf::Vector2f(-125, 300) */
+/* #define DOWN_SPEED_SIZE1       -340 */
+/* #define DOWN_SPEED_SIZE2       340 */
+/* #define UP_SPEED_WH1           sf::Vector2f(125, -300) */
+/* #define UP_SPEED_WH2           sf::Vector2f(-125, -300) */
+/* #define UP_SPEED_SIZE1         -340 */
+/* #define UP_SPEED_SIZE2         340 */
 #endif
 
 //气的参数

@@ -57,7 +57,6 @@ public:
     //棋子不存在条件(如果是棋盘上的棋子，那么它们会变半透明；若是悬停棋子，那么会在棋子上出现一个红色的X)
     int isPieceAlive(ChessPiece* chessPiece);
     //删除无气的棋子(通过标记坐标点来找棋子并删除，压到被吃棋子栈(并且计数)->为悔棋做准备)
-    /* void removeNoneQiPiece(sf::Vector2f markPoint); */
     void removeNoneQiPiece(int key);
     //重置无气棋子的状态，把透明状态改回来，红色的X不显示
     void resetNoneQiPiece();
@@ -67,8 +66,12 @@ public:
     bool isRepeatedBoardPosition();
     //悔棋
     void repentance();
+    //退回被吃棋子
     void returnCapturedPieces(std::pair<int, ChessPiece> chessPiece);
+    //删除棋子，不进栈
     void deletePiece(int key);
+    //修改队列棋谱
+    void modifyChessManualQueue(int key, int kind);
 
 private:
     //棋盘指针
@@ -109,7 +112,7 @@ private:
     std::stack<int> _capturedPiecesCount;
     //被吃棋子储存栈
     std::stack<std::pair<int,ChessPiece>> _capturedPieces;
-    //悔棋 (stack<bool>) -> 没有没吃棋子false，有被吃棋子数true
+    //悔棋 (stack<int, bool>) -> 没有没吃棋子false，有被吃棋子数true, int 记录每一手下的棋子的编号
     std::stack<std::pair<int, bool>> _repentance;
 
 private:

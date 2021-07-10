@@ -47,42 +47,83 @@ StatusPanel::StatusPanel()
     _whiteFrame.setPosition(WHITE_FRAME_POSITION);
     _whiteFrame.setFillColor(WHITE_FRAME_COLOR);
     _whiteFrame.setSize(BLACK_FRAME_SIZE);
-    _blackFramePosition = BLACK_FRAME_POSITION;
-    _whiteFramePosition = WHITE_FRAME_POSITION;
-    _blackFrameSize = BLACK_FRAME_SIZE;
-    _whiteFrameSize = WHITE_FRAME_SZIE;
+    /* _blackFramePosition = BLACK_FRAME_POSITION; */
+    /* _whiteFramePosition = WHITE_FRAME_POSITION; */
+    /* _blackFrameSize = BLACK_FRAME_SIZE; */
+    /* _whiteFrameSize = WHITE_FRAME_SZIE; */
+    //计时器的配置
+    if (isLoadSuccess)
+    {
+        _blackTimer.setFont(_myFont);
+        _blackTimer.setString("00:00:00");
+        _blackTimer.setFillColor(BLACK_TIMER_COLOR);
+        _blackTimer.setPosition(BLACK_FRAME_POSITION + BLACK_TIMER_OFFSET);
+        _blackTimer.setCharacterSize(LINE_OFFSET * 1.5);
+        _blackClock.restart();
+        _whiteTimer.setFont(_myFont);
+        _whiteTimer.setString("00:00:00");
+        _whiteTimer.setFillColor(WHITE_TIMER_COLOR);
+        _whiteTimer.setPosition(WHITE_FRAME_POSITION + WHITE_TIMER_OFFSET);
+        _whiteTimer.setCharacterSize(LINE_OFFSET * 1.5);
+        _whiteClock.restart();
+
+    }
 }
 
 
 void StatusPanel::update(sf::Time deltaTime)
 {
-    if (count >= 0)
+    if (_blackTimerController)
     {
-        count--;
-        float blackFrameVelocity_pos = wh_v;
-        float blackFrameVelocity_size = size_v;
-        if (count == 10)
+        std::string blackClock = "";
+        /* int dms = _blackClock.getElapsedTime().asMilliseconds(); */
+        _blackDMS += _blackClock.restart().asMilliseconds();
+        /* int ds = dms / 1000; */
+        _blackDS = _blackDMS / 1000;
+        /* _blackTimeCounter = sf::Vector3i(ds/3600, (ds/60)%60, ds%60); */
+        _blackTimeCounter = sf::Vector3i(_blackDS/3600, (_blackDS/60)%60, _blackDS%60);
+        if (_blackTimeCounter.z >= 60)
         {
-            wh_v = -wh_v;
-            size_v = -size_v;
-            count = 20;
+            _blackTimeCounter.y += _blackTimeCounter.x / 60;
+            _blackTimeCounter.z %= 60;
         }
-        if (_blackFrameSize.y > 0 && _blackFrameSize.y < 30)
-            _blackFrame.setFillColor(_blackFrame.getFillColor() == BLACK_FRAME_COLOR ? WHITE_FRAME_COLOR : BLACK_FRAME_COLOR);
-        if (_blackFramePosition.y < 117)
+        if (_blackTimeCounter.y >= 60)
         {
-            blackFrameVelocity_size = -size_v;
+            _blackTimeCounter.x += _blackTimeCounter.y / 60;
+            _blackTimeCounter.y %= 60;
         }
-        _blackFramePosition.y += deltaTime.asSeconds() * blackFrameVelocity_pos;
-        _blackFrameSize.y += deltaTime.asSeconds() * blackFrameVelocity_size;
-
-        _blackFrame.setPosition(_blackFramePosition);
-        _blackFrame.setSize(_blackFrameSize);
-        /* if (count == 0) */
-        /* { */
-        /*     wh_v = 255; */
-        /*     size_v = 450; */
-        /* } */
+        blackClock += (_blackTimeCounter.x ? "0" + std::to_string(_blackTimeCounter.x) + ":" : "00:");
+        blackClock += (_blackTimeCounter.y == 0 ? "00:" : _blackTimeCounter.y < 10 ? "0" + std::to_string(_blackTimeCounter.y) + ":"
+                       : std::to_string(_blackTimeCounter.y) + ":");
+        blackClock += (_blackTimeCounter.z == 0 ? "00" : _blackTimeCounter.z < 10 ? "0" + std::to_string(_blackTimeCounter.z)
+                       : std::to_string(_blackTimeCounter.z));
+        _blackTimer.setString(blackClock);
+    }
+    if (_whiteTimerController)
+    {
+        std::string whiteClock = "";
+        /* int dms = _whiteClock.getElapsedTime().asMilliseconds(); */
+        _whiteDMS += _whiteClock.restart().asMilliseconds();
+        /* int ds = dms / 1000; */
+        _whiteDS = _whiteDMS / 1000;
+        /* _whiteTimeCounter = sf::Vector3i(ds/3600, (ds/60)%60, ds%60); */
+        _whiteTimeCounter = sf::Vector3i(_whiteDS/3600, (_whiteDS/60)%60, _whiteDS%60);
+        if (_whiteTimeCounter.z >= 60)
+        {
+            _whiteTimeCounter.y += _whiteTimeCounter.x / 60;
+            _whiteTimeCounter.z %= 60;
+        }
+        if (_whiteTimeCounter.y >= 60)
+        {
+            _whiteTimeCounter.x += _whiteTimeCounter.y / 60;
+            _whiteTimeCounter.y %= 60;
+        }
+        whiteClock += (_whiteTimeCounter.x ? "0" + std::to_string(_whiteTimeCounter.x) + ":" : "00:");
+        whiteClock += (_whiteTimeCounter.y == 0 ? "00:" : _whiteTimeCounter.y < 10 ? "0" + std::to_string(_whiteTimeCounter.y) + ":"
+                       : std::to_string(_whiteTimeCounter.y) + ":");
+        whiteClock += (_whiteTimeCounter.z == 0 ? "00" : _whiteTimeCounter.z < 10 ? "0" + std::to_string(_whiteTimeCounter.z)
+                       : std::to_string(_whiteTimeCounter.z));
+        _whiteTimer.setString(whiteClock);
     }
 }
 
@@ -96,4 +137,36 @@ void StatusPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_showChessManual, states);
     target.draw(_blackFrame, states);
     target.draw(_whiteFrame, states);
+    target.draw(_blackTimer, states);
+    target.draw(_whiteTimer, states);
 }
+
+//花里胡哨
+/* if (count >= 0) */
+/*     { */
+/*         count--; */
+/*         float blackFrameVelocity_pos = wh_v; */
+/*         float blackFrameVelocity_size = size_v; */
+/*         if (count == 10) */
+/*         { */
+/*             wh_v = -wh_v; */
+/*             size_v = -size_v; */
+/*             count = 20; */
+/*         } */
+/*         if (_blackFrameSize.y > 0 && _blackFrameSize.y < 30) */
+/*             _blackFrame.setFillColor(_blackFrame.getFillColor() == BLACK_FRAME_COLOR ? WHITE_FRAME_COLOR : BLACK_FRAME_COLOR); */
+/*         if (_blackFramePosition.y < 117) */
+/*         { */
+/*             blackFrameVelocity_size = -size_v; */
+/*         } */
+/*         _blackFramePosition.y += deltaTime.asSeconds() * blackFrameVelocity_pos; */
+/*         _blackFrameSize.y += deltaTime.asSeconds() * blackFrameVelocity_size; */
+
+/*         _blackFrame.setPosition(_blackFramePosition); */
+/*         _blackFrame.setSize(_blackFrameSize); */
+/*         /1* if (count == 0) *1/ */
+/*         /1* { *1/ */
+/*         /1*     wh_v = 255; *1/ */
+/*         /1*     size_v = 450; *1/ */
+/*         /1* } *1/ */
+/*     } */

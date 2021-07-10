@@ -100,7 +100,7 @@ void GoGame::processEvents()
 void GoGame::update(sf::Time deltaTime)
 {
     /* _myChessBoard.update(deltaTime); */
-    /* _myStatusPanel.update(deltaTime); */
+    _myStatusPanel.update(deltaTime);
 }
 
 void GoGame::render()
